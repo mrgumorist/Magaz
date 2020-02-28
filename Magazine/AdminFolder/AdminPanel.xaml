@@ -66,6 +66,7 @@
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_3">Звіти</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_4">Тестування</Button>
                     <Button Background="Black" Foreground="White" FontSize="30">Останні дії</Button>
+                    <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_6">Повернення</Button>
                 </StackPanel>
             </Grid>
             <Frame Grid.Column="1" Name="frame1" Visibility="Hidden">
@@ -78,6 +79,12 @@
 
             </Frame>
             <Frame Grid.Column="1" Name="frame4" Visibility="Hidden">
+
+            </Frame>
+            <Frame Grid.Column="1" Name="frame5" Visibility="Hidden">
+
+            </Frame>
+            <Frame Grid.Column="1" Name="frame6" Visibility="Hidden">
 
             </Frame>
         </Grid>

@@ -84,6 +84,8 @@ namespace Magazine.AdminFolder
             frame2.Visibility = Visibility.Hidden;
             frame3.Visibility = Visibility.Hidden;
             frame4.Visibility = Visibility.Hidden;
+            frame5.Visibility = Visibility.Hidden;
+            frame6.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -92,6 +94,8 @@ namespace Magazine.AdminFolder
             frame2.Visibility = Visibility.Visible;
             frame3.Visibility = Visibility.Hidden;
             frame4.Visibility = Visibility.Hidden;
+            frame5.Visibility = Visibility.Hidden;
+            frame6.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -100,6 +104,8 @@ namespace Magazine.AdminFolder
             frame2.Visibility = Visibility.Hidden;
             frame3.Visibility = Visibility.Visible;
             frame4.Visibility = Visibility.Hidden;
+            frame5.Visibility = Visibility.Hidden;
+            frame6.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -108,6 +114,8 @@ namespace Magazine.AdminFolder
             frame2.Visibility = Visibility.Hidden;
             frame3.Visibility = Visibility.Hidden;
             frame4.Visibility = Visibility.Visible;
+            frame5.Visibility = Visibility.Hidden;
+            frame6.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -116,6 +124,16 @@ namespace Magazine.AdminFolder
             ChangeME changeUser = new ChangeME(ID);
             changeUser.ShowDialog();
             LoadInfo();
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            frame1.Visibility = Visibility.Hidden;
+            frame2.Visibility = Visibility.Hidden;
+            frame3.Visibility = Visibility.Hidden;
+            frame4.Visibility = Visibility.Hidden;
+            frame5.Visibility = Visibility.Hidden;
+            frame6.Visibility = Visibility.Visible;
         }
     }
 }
