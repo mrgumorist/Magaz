@@ -1,0 +1,146 @@
+﻿<Page x:Class="Magazine.AdminFolder.Products"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Magazine.AdminFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Products">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="41"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="Filter" FontSize="25" KeyDown="Filter_KeyDown"></TextBox>
+            <Button Grid.Column="1" Click="Button_Click_7">Пошук</Button>
+            <Button Grid.Column="2" Click="Button_Click_6">Скасувати фільтр</Button>
+        </Grid>
+        <DataGrid AutoGenerateColumns="False" x:Name="ProductsGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="1" ColumnWidth="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Massa}" Header="Масса" Width="140" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1/кг" Width="140" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="49"/>
+                <RowDefinition Height="360*"/>
+            </Grid.RowDefinitions>
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" Name="combo"  FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Додати новий" FontSize="20"></ComboBoxItem>
+                <ComboBoxItem Content="Змінити існуючий" FontSize="20"></ComboBoxItem>
+            </ComboBox>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Name="AddNew" Visibility="Hidden" Grid.Row="2">
+                <StackPanel>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Код</Label>
+                    <Button Height="40" FontSize="30" Click="Button_Click">Ввести код</Button>
+                    <TextBox Height="40" FontSize="30" Name="Code" KeyDown="Code_KeyDown"></TextBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Назва товару</Label>
+                    <TextBox Height="40" FontSize="30" Name="NameOfProduct" KeyDown="NameOfProduct_KeyDown"></TextBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Короткий опис</Label>
+                    <TextBox Height="40" FontSize="30" Name="ShortDescription" KeyDown="ShortDescription_KeyDown" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" ></TextBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Оберіть величину:</Label>
+                    <ComboBox SelectionChanged="Combo2_SelectionChanged" Name="combo2"  FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="Кількість" FontSize="30"></ComboBoxItem>
+                        <ComboBoxItem Content="Масса" FontSize="30"></ComboBoxItem>
+                    </ComboBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Введіть значення:</Label>
+                    <TextBox Height="40" FontSize="30" Name="Value" KeyDown="Value_KeyDown"></TextBox>
+                    <Label FontSize="30">Ціна за одиницю/кг</Label>
+                    <TextBox Height="40" FontSize="30" Name="Price" KeyDown="Price_KeyDown"></TextBox>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Name="ChangeCurrent" Visibility="Hidden" Grid.Row="1">
+                <StackPanel >
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Код</Label>
+                    <Button Height="40" FontSize="30" Click="Button_Click_3">Змінити код</Button>
+                    <TextBox Height="40" FontSize="30" Name="ChangeCode"></TextBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Назва товару</Label>
+                    <TextBox Height="40" FontSize="30" Name="ChangeNameOfProduct"></TextBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Короткий опис</Label>
+                    <TextBox Height="80" FontSize="30" AcceptsReturn="True" Name="ChangeShortDescription" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" ></TextBox>
+                    <TextBox Height="40" FontSize="30" Name="Type" IsReadOnly="True"></TextBox>
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Значення:</Label>
+                    <TextBox Height="40" FontSize="30" Name="OldValue" IsReadOnly="True"></TextBox>
+              
+                    <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Операції з кількістю/масою:</Label>
+                   
+                    <Grid Grid.Row="2" Height="50" Name="Numarable" Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Name="Plus" Click="Plus_Click">+</Button>
+                        <TextBox FontSize="30" Name="NewValue" Grid.Column="1"></TextBox>
+                        <Button Name="Minus" Click="Minus_Click" Grid.Column="2">-</Button>
+                   
+                    </Grid>
+                    <Grid Height="50" Name="UnNumarable" Visibility="Visible" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="75"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="PlusMass" Click="PlusMass_Click">+</Button>
+                        <TextBox FontSize="30" Name="NewMassa" Grid.Column="1"></TextBox>
+                        <Label FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="2">kg</Label>
+                        <Button Name="MinusMass" Click="MinusMass_Click" Grid.Column="3">-</Button>
+                    </Grid>
+                    <Label FontSize="30">Ціна за одиницю/кг</Label>
+                    <TextBox Height="40" FontSize="30" Name="ChangePrice"></TextBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+       
+        <Grid Grid.Row="3" Grid.Column="1" Name="ButtonsAdd" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="Button_Click_2">Додати</Button>
+            <Button Grid.Column="1" Click="Button_Click_1">Скасувати</Button>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1" Name="ButtonsChange" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="Button_Click_5">Змінити</Button>
+            <Button Grid.Column="1" Click="Button_Click_4">Скасувати</Button>
+        </Grid>
+        
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="Change" Click="Change_Click">Змінити</Button>
+            <Button Name="Delete" Grid.Column="1" Click="Delete_Click">Видалити</Button>
+            <Button Name="Upddate" Click="Upddate_Click" Grid.Column="2">Оновити</Button>
+        </Grid>
+        
+    </Grid>
+    
+</Page>

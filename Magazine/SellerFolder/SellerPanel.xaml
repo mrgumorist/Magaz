@@ -1,0 +1,172 @@
+﻿<Window x:Class="Magazine.SellerFolder.SellerPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Magazine.SellerFolder"
+        mc:Ignorable="d" 
+        Title="Продавець" Height="450" Width="800" WindowState="Maximized" Activated="Window_Activated" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="82*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Button Background="Black" Foreground="White" FontSize="20" Click="Button_Click">Змінити пароль</Button>
+            <Button Background="Black" Foreground="White" FontSize="20" Grid.Column="1" Click="Button_Click_1">Змінити про себе</Button>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Background="Black" Foreground="White" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" Name="NameUser">Name</TextBox>
+                <TextBox Background="Black" Foreground="White" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" Grid.Row="1" Name="SurnameUser">Surname</TextBox>
+                <Image Grid.Column="1" Grid.RowSpan="2" Source="Office-Girl-icon.png"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Background="Black" Foreground="White" FontSize="20" FontWeight="Bold">Оберіть опцію:</Label>
+                <ComboBox Grid.Row="1"  FontSize="20" Name="Comboo">
+                    <ComboBoxItem>По штрих коду</ComboBoxItem>
+                    <ComboBoxItem>За іменем</ComboBoxItem>
+                </ComboBox>
+                <TextBox Grid.Row="2" FontSize="25" Name="Searching" KeyDown="Searching_KeyDown"></TextBox>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Background="Black" Foreground="White" FontSize="20" Click="Button_Click_2">Пошук</Button>
+                    <Button Background="Black" Foreground="White" FontSize="20" Grid.Column="1" Click="Button_Click_3">Очистити Пошук</Button>
+
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DataGrid AutoGenerateColumns="False" x:Name="ProductsGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="1" ColumnWidth="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MouseDoubleClick="ProductsGrid_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden"/>
+                        <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Massa}" Header="Масса" Width="140" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1/кг" Width="140" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="116"/>
+                    <ColumnDefinition Width="281*"/>
+                </Grid.ColumnDefinitions>
+                <Label Background="Black" FontSize="20" Foreground="White">Чек №:</Label>
+                <Label Background="Black" FontSize="20" Foreground="White" Grid.Column="1" Name="CheckNum"></Label>
+
+            </Grid>
+            <Grid Grid.Column='1' Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <Label Background="Black" Foreground="White" FontSize="20">Кінцевий чек:</Label>
+                    <DataGrid AutoGenerateColumns="False" x:Name="Numarable" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" />
+                            <DataGridTextColumn Binding="{Binding Massa}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding IsNumurable}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1" Width="100" IsReadOnly="True" Visibility="Visible"/>
+                            
+                            
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Змінити" Click="MenuItem_Click_2"></MenuItem>
+                                <MenuItem Header="Видалити" Click="MenuItem_Click_3"></MenuItem>
+                            </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        
+                    </DataGrid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Background="Black" Foreground="White" FontSize="20" >Сумма:</Label>
+                        <Label Grid.Column="1" Background="Black" Foreground="White" FontSize="20" Name="Sum"></Label>
+                    </Grid>
+                   
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="49*"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid AutoGenerateColumns="False" x:Name="UnNumarable" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Massa}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Visible"/>
+                            <DataGridTextColumn Binding="{Binding IsNumurable}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1 кг" Width="100" IsReadOnly="True" Visibility="Visible"/>
+
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Змінити" Click="MenuItem_Click"></MenuItem>
+                                <MenuItem Header="Видалити" Click="MenuItem_Click_1"></MenuItem>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Background="Black" Foreground="White" FontSize="20" Click="Button_Click_5">Перейти до оплати</Button>
+                        <Button Background="Black" Foreground="White" FontSize="20" Grid.Column="1" Click="Button_Click_4">Очистити все</Button>
+                    </Grid>
+               </Grid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>
