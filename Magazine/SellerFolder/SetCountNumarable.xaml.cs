@@ -80,5 +80,10 @@ namespace Magazine.AdminFolder
                 Button_Click_1(sender, e);
             }
         }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            Num.Focus();
+        }
     }
 }

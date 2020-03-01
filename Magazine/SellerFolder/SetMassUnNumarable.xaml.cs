@@ -89,5 +89,10 @@ namespace Magazine.SellerFolder
                 Button_Click_1(sender, e);
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Num.Focus();
+        }
     }
 }

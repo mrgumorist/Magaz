@@ -36,15 +36,19 @@ namespace Magazine.SellerFolder
                 if(item.IsNumurable==true)
                 {
                     SumM += item.Price * item.Count;
+                  
                 }
                 else
                 {
                     SumM += item.Price * item.Massa;
+                 
                 }
             }
+            SumM= Math.Round(SumM.Value, 1);
             Getted.Focus();
+            Getted.Text = SumM.ToString();
             CheckNUM.Content = "ЧЕК № " + check.ID;
-            Sum.Content = "Сумма до сплати: " + SumM;
+            Sum.Content = "Сумма до сплати: " + SumM.Value+"грн" ;
             
         }
 
@@ -69,7 +73,7 @@ namespace Magazine.SellerFolder
             bool bNum = double.TryParse(Getted.Text, out i);
             if (bNum)
             {
-                if (i - SumM>0)
+                if ((i - SumM.Value)>=0)
                 {
                     check.SumPrice = SumM;
                     check.DateCloseOfCheck = DateTime.Now;

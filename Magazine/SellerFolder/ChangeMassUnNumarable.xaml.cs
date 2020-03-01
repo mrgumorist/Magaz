@@ -37,6 +37,7 @@ namespace Magazine.SellerFolder
             Tovar.Content = "Товар: " + product1.Name;
             Num.Text = product1.Massa.ToString();
             InitializeComponent();
+            Num.Focus();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

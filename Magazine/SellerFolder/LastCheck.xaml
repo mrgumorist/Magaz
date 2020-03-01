@@ -19,7 +19,7 @@
             <ComboBoxItem FontSize="15" Height="25" Content="В кредит"/>
         </ComboBox>
         <Label Content="Друкувати чек?" HorizontalAlignment="Left" Margin="0,211,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy3" />
-        <ComboBox Margin="256,211,50.6,143.6" FontSize="20" Text="Ні" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="67" Name="Printt">
+        <ComboBox Margin="265,219,41.6,135.6" FontSize="20" Text="Ні" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="67" Name="Printt">
             <ComboBoxItem FontSize="15" Height="25" Content="Так"/>
             <ComboBoxItem FontSize="15" Height="25" Content="Ні" IsSelected="True"/>
         </ComboBox>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Magazine.SellerFolder"
+        xmlns:local="clr-namespace:Magazine.SellerFolder" Loaded="Window_Loaded"
         mc:Ignorable="d"
         Title="SetMassUnNumarable" Height="234.866" Width="340.891" Background="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>

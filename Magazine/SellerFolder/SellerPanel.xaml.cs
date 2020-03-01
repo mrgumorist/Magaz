@@ -230,19 +230,17 @@ namespace Magazine.SellerFolder
                                     if (jsonResponse1 != @"0")
                                     {
                                         List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
-                                        if (productDtos.Count != 1)
+                                        if (productDtos.Count != 0)
                                         {
                                             ProductsGrid.ItemsSource = productDtos;
+                                           
                                         }
-                                        else
-                                        {
-                                            NextStage(productDtos[0]);
-                                            Clear();
-                                        }
+                                        
                                     }
                                     else
                                     {
                                         MessageBox.Show("За даним ім'ям нічого не найдено");
+                                        Searching.Focus();
                                     }
                                 }
                                 catch
@@ -363,6 +361,7 @@ namespace Magazine.SellerFolder
                         UpdateChecks();
                     }
                 }
+                Searching.Focus();
             }
             else
             {
@@ -454,6 +453,7 @@ namespace Magazine.SellerFolder
                         }
                     }
                 }
+                Searching.Focus();
                 //Доповнення
             }
             //CurrentCheck.Products.Add();
@@ -516,7 +516,7 @@ namespace Magazine.SellerFolder
                                     update.ShowDialog();
                                     if (Helper.issuccessful == true)
                                     {
-                                        UnNumarableList.First(x => x.ID == ToChange.ID).Massa = Helper.mass;
+                                        UnNumarableList.First(x => x.IDOfProduct == ToChange.IDOfProduct).Massa = Helper.mass;
                                         UpdateChecks();
                                     }
                                 }
@@ -608,7 +608,7 @@ namespace Magazine.SellerFolder
                                     update.ShowDialog();
                                     if (Helper.issuccessful == true)
                                     {
-                                        NumarableList.First(x => x.ID == ToChange.ID).Count = Helper.count;
+                                        NumarableList.First(x => x.IDOfProduct == ToChange.IDOfProduct).Count = Helper.count;
                                         UpdateChecks();
                                     }
                                 }
@@ -683,6 +683,11 @@ namespace Magazine.SellerFolder
         private void Window_Activated(object sender, EventArgs e)
         {
            
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Searching.Focus();
         }
     }
 }

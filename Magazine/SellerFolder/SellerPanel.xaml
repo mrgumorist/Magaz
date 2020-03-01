@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Magazine.SellerFolder"
+        xmlns:local="clr-namespace:Magazine.SellerFolder" Loaded="Window_Loaded"
         mc:Ignorable="d" 
         Title="Продавець" Height="450" Width="800" WindowState="Maximized" Activated="Window_Activated" >
     <Grid>
@@ -52,7 +52,7 @@
                 </Grid.RowDefinitions>
                 <Label Background="Black" Foreground="White" FontSize="20" FontWeight="Bold">Оберіть опцію:</Label>
                 <ComboBox Grid.Row="1"  FontSize="20" Name="Comboo">
-                    <ComboBoxItem>По штрих коду</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">По штрих коду</ComboBoxItem>
                     <ComboBoxItem>За іменем</ComboBoxItem>
                 </ComboBox>
                 <TextBox Grid.Row="2" FontSize="25" Name="Searching" KeyDown="Searching_KeyDown"></TextBox>

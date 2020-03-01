@@ -35,6 +35,7 @@ namespace Magazine.SellerFolder
             ForText.Content = maxcount;
             this.maxcount = maxcount;
             Tovar.Content = "Товар: " + product.Name;
+            Num.Focus();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
