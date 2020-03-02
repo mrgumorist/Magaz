@@ -63,9 +63,9 @@
                 <StackPanel>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_1">Аккаунти</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_2">Продукти</Button>
-                    <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_3">Звіти</Button>
+                    <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_3">Продажі</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_4">Тестування</Button>
-                    <Button Background="Black" Foreground="White" FontSize="30">Останні дії</Button>
+                    <Button Background="Black" Foreground="White" FontSize="30">Списання</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_6">Повернення</Button>
                 </StackPanel>
             </Grid>

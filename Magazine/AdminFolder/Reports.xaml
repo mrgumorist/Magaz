@@ -23,5 +23,12 @@
             <DatePicker FontSize="40" Name="D2" Grid.Column="1"></DatePicker>
             <Button Grid.Column="2" Background="Black" Foreground="White" FontSize="25" FontWeight="Bold" Click="Button_Click">Зробити звіт</Button>
         </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="351*"/>
+                <RowDefinition Height="34"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="1" FontSize="25"></Label>
+        </Grid>
     </Grid>
 </Page>
