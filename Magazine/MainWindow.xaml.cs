@@ -104,8 +104,6 @@ namespace Magazine
                                                     panel.Closed += Panel_Closed;
                                                     this.Hide();
                                                     panel.ShowDialog();
-
-                                                    //this.Show();
                                                 }
                                                 Login.Clear();
                                                 Pass.Clear();

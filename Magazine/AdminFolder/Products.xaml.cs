@@ -285,8 +285,11 @@ namespace Magazine.AdminFolder
                                         bool isInt = int.TryParse(Value.Text, out num);
                                         if (isInt)
                                         {
+                                        if (num > 0)
+                                        {
                                             isvalid = true;
                                             num1 = num;
+                                        }
                                             //MessageBox.Show("Double");
                                             // double here
                                         }
@@ -294,7 +297,7 @@ namespace Magazine.AdminFolder
                                         {
                                             MessageBox.Show("Число не є коректним. Приклад числа: 3");
                                             isvalid = false;
-                                           }           
+                                        }           
                                     }
                                     else
                                     {
@@ -302,8 +305,11 @@ namespace Magazine.AdminFolder
                                         bool isDouble = Double.TryParse(Value.Text, out num);
                                         if (isDouble)
                                         {
+                                        if (num > 0)
+                                        {
                                             isvalid = true;
                                             num2 = num;
+                                        }
                                             //MessageBox.Show("Double");
                                             // double here
                                         }
@@ -316,10 +322,13 @@ namespace Magazine.AdminFolder
                                     bool isDouble1 = Double.TryParse(Price.Text, out num11);
                                     if (isDouble1)
                                     {
+                                        if (num11 > 0)
+                                        {
                                         isvalid2 = true;
                                         price = num11;
                                         //MessageBox.Show("Double");
                                         // double here
+                                        }
                                     }
                                     else
                                     {
@@ -467,9 +476,39 @@ namespace Magazine.AdminFolder
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            ProductDto currentObject = (ProductDto)ProductsGrid.SelectedItem;
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Ви впевнені що бажаєте видалити " , "Підтвердження дії", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
+                string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/DeleteProductById";
+
+                var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                if (webRequest1 != null)
+                {
+                    webRequest1.Method = "GET";
+                    webRequest1.Timeout = 12000;
+                    webRequest1.ContentType = "application/json";
+                    webRequest1.Headers.Add("Safety", "Safety");
+                    webRequest1.Headers.Add("ID", currentObject.ID.ToString());
+                    //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
+                    using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                    {
+                        using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                        {
+                            try
+                            {
+                                var jsonResponse1 = sr1.ReadToEnd();
+                                MessageBox.Show("Успішне видалення");
+                                Update();
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                    }
+                }
+                
                 //TODO DELETE
             }
         }
