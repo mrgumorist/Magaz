@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Magazine.ModelsDto;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +35,7 @@ namespace Magazine.AdminFolder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Починаємо пошук! Зачекайте.");
+            
             if (D1.SelectedDate.Value.ToLongDateString() == D2.SelectedDate.Value.ToLongDateString()) {
 
                 
@@ -55,8 +56,9 @@ namespace Magazine.AdminFolder
                    webRequest1.Headers.Add("Safety", "Safety");
                    using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
                    {
-                      // ;
-                       streamWriter2.Write(JsonConvert.SerializeObject(D1.SelectedDate.Value));
+                    DateDto date = new DateDto();
+                    date.date = D1.SelectedDate.Value;
+                       streamWriter2.Write(JsonConvert.SerializeObject(date));
                    }
                    try
                    {
@@ -67,8 +69,15 @@ namespace Magazine.AdminFolder
                                try
                                {
                                    var jsonResponse1 = sr1.ReadToEnd();
-                                   double kek = double.Parse(jsonResponse1);
-                                   MessageBox.Show(kek.ToString());
+                                List<CheckDto> checks = JsonConvert.DeserializeObject<List<CheckDto>>(jsonResponse1);
+                                //MessageBox.Show(jsonResponse1);
+                                ChecksGrid.ItemsSource = checks;
+                                double sum = 0;
+                                foreach (var item in checks)
+                                {
+                                    sum += item.SumPrice.Value;
+                                }
+                                MainReport.Content = "Загальна сума: " + sum+" грн!";
                                }
                                catch
                                {

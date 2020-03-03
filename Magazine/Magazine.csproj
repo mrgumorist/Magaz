@@ -93,6 +93,7 @@
     <Compile Include="AdminFolder\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDto\DateDto.cs" />
     <Compile Include="SellerFolder\ChangeCountNumarable.xaml.cs">
       <DependentUpon>ChangeCountNumarable.xaml</DependentUpon>
     </Compile>

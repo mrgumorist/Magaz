@@ -67,6 +67,7 @@
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_4">Тестування</Button>
                     <Button Background="Black" Foreground="White" FontSize="30">Списання</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_6">Повернення</Button>
+                    <Button Background="Black" Foreground="White" FontSize="30">Боржники</Button>
                 </StackPanel>
             </Grid>
             <Frame Grid.Column="1" Name="frame1" Visibility="Hidden">

@@ -26,9 +26,17 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="351*"/>
-                <RowDefinition Height="34"/>
+                <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" FontSize="25"></Label>
+            <DataGrid AutoGenerateColumns="False" x:Name="ChecksGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="0" ColumnWidth="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="Дата" Width="140" IsReadOnly="True" Visibility="Hidden"/>
+                    <DataGridTextColumn Binding="{Binding DateCreatingOfCheck}" Header="Дата" Width="140" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding TypeOfPay}" Header="Тип оплати" Width="100" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SumPrice}" Header="Сумма" Width="110" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Grid.Row="1" Name="MainReport" Background="Black" Foreground="White" FontSize="25">Сумма: </Label>
         </Grid>
     </Grid>
 </Page>
