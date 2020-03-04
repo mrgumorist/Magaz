@@ -66,7 +66,8 @@ namespace Magazine.AdminFolder
             frame2.Source = new Uri("Products.xaml", UriKind.RelativeOrAbsolute);
             frame3.Source = new Uri("Reports.xaml", UriKind.RelativeOrAbsolute);
             //frame4.Source = new Uri("Accounts.xaml", UriKind.RelativeOrAbsolute);
-            
+            frame7.Source = new Uri("Credits.xaml", UriKind.RelativeOrAbsolute);
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -86,6 +87,7 @@ namespace Magazine.AdminFolder
             frame4.Visibility = Visibility.Hidden;
             frame5.Visibility = Visibility.Hidden;
             frame6.Visibility = Visibility.Hidden;
+            frame7.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -96,6 +98,7 @@ namespace Magazine.AdminFolder
             frame4.Visibility = Visibility.Hidden;
             frame5.Visibility = Visibility.Hidden;
             frame6.Visibility = Visibility.Hidden;
+            frame7.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -106,6 +109,7 @@ namespace Magazine.AdminFolder
             frame4.Visibility = Visibility.Hidden;
             frame5.Visibility = Visibility.Hidden;
             frame6.Visibility = Visibility.Hidden;
+            frame7.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -116,6 +120,7 @@ namespace Magazine.AdminFolder
             frame4.Visibility = Visibility.Visible;
             frame5.Visibility = Visibility.Hidden;
             frame6.Visibility = Visibility.Hidden;
+            frame7.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -134,6 +139,18 @@ namespace Magazine.AdminFolder
             frame4.Visibility = Visibility.Hidden;
             frame5.Visibility = Visibility.Hidden;
             frame6.Visibility = Visibility.Visible;
+            frame7.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            frame1.Visibility = Visibility.Hidden;
+            frame2.Visibility = Visibility.Hidden;
+            frame3.Visibility = Visibility.Hidden;
+            frame4.Visibility = Visibility.Hidden;
+            frame5.Visibility = Visibility.Hidden;
+            frame6.Visibility = Visibility.Hidden;
+            frame7.Visibility = Visibility.Visible;
         }
     }
 }

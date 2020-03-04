@@ -86,6 +86,9 @@
     <Compile Include="AdminFolder\ChangeME.xaml.cs">
       <DependentUpon>ChangeME.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminFolder\Credits.xaml.cs">
+      <DependentUpon>Credits.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminFolder\Helper.cs" />
     <Compile Include="AdminFolder\Products.xaml.cs">
       <DependentUpon>Products.xaml</DependentUpon>
@@ -93,6 +96,7 @@
     <Compile Include="AdminFolder\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDto\CreditDto.cs" />
     <Compile Include="ModelsDto\DateDto.cs" />
     <Compile Include="ModelsDto\DatesDto.cs" />
     <Compile Include="SellerFolder\ChangeCountNumarable.xaml.cs">
@@ -161,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminFolder\ChangeME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminFolder\Credits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
