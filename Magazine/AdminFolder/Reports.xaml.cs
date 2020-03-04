@@ -38,59 +38,112 @@ namespace Magazine.AdminFolder
             
             if (D1.SelectedDate.Value.ToLongDateString() == D2.SelectedDate.Value.ToLongDateString()) {
 
-                
+                string WEBSERVICE_URL1 = StaticHelper.URL + $@"api/Apii/GetSalesByDate";
+
+                var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                if (webRequest1 != null)
+                {
+                    webRequest1.Method = "POST";
+                    webRequest1.Timeout = 12000;
+                    webRequest1.ContentType = "application/json";
+                    webRequest1.Headers.Add("Safety", "Safety");
+                    using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
+                    {
+                        DateDto date = new DateDto();
+                        date.date = D1.SelectedDate.Value;
+                        streamWriter2.Write(JsonConvert.SerializeObject(date));
+                    }
+                    try
+                    {
+                        using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                        {
+                            using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                            {
+                                try
+                                {
+                                    var jsonResponse1 = sr1.ReadToEnd();
+                                    List<CheckDto> checks = JsonConvert.DeserializeObject<List<CheckDto>>(jsonResponse1);
+                                    //MessageBox.Show(jsonResponse1);
+                                    ChecksGrid.ItemsSource = checks;
+                                    double sum = 0;
+                                    foreach (var item in checks)
+                                    {
+                                        sum += item.SumPrice.Value;
+                                    }
+                                    MainReport.Content = "Загальна сума: " + sum + " грн!";
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("Error");
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error");
+                    }
+                }
             }
             else
             {
-                
+                if (D1.SelectedDate < D2.SelectedDate)
+                {
+                    string WEBSERVICE_URL1 = StaticHelper.URL + $@"api/Apii/GetSalesByDates";
+
+                    var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                    if (webRequest1 != null)
+                    {
+                        webRequest1.Method = "POST";
+                        webRequest1.Timeout = 12000;
+                        webRequest1.ContentType = "application/json";
+                        webRequest1.Headers.Add("Safety", "Safety");
+                        using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
+                        {
+                            DatesDto date = new DatesDto();
+                            date.date2 = D2.SelectedDate.Value;
+                            date.date1 = D1.SelectedDate.Value;
+                            streamWriter2.Write(JsonConvert.SerializeObject(date));
+                        }
+                        try
+                        {
+                            using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                            {
+                                using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                                {
+                                    try
+                                    {
+                                        var jsonResponse1 = sr1.ReadToEnd();
+                                        List<CheckDto> checks = JsonConvert.DeserializeObject<List<CheckDto>>(jsonResponse1);
+                                        //MessageBox.Show(jsonResponse1);
+                                        ChecksGrid.ItemsSource = checks;
+                                        double sum = 0;
+                                        foreach (var item in checks)
+                                        {
+                                            sum += item.SumPrice.Value;
+                                        }
+                                        MainReport.Content = "Загальна сума: " + sum + " грн!";
+                                    }
+                                    catch
+                                    {
+                                        MessageBox.Show("Error");
+                                    }
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Error");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Помилка. Дата початкова не може бути більшою за кінцеву");
+                }
             }
             
-               string WEBSERVICE_URL1 = StaticHelper.URL + $@"api/Apii/GetSalesByDate";
-
-               var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-               if (webRequest1 != null)
-               {
-                   webRequest1.Method = "POST";
-                   webRequest1.Timeout = 12000;
-                   webRequest1.ContentType = "application/json";
-                   webRequest1.Headers.Add("Safety", "Safety");
-                   using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
-                   {
-                    DateDto date = new DateDto();
-                    date.date = D1.SelectedDate.Value;
-                       streamWriter2.Write(JsonConvert.SerializeObject(date));
-                   }
-                   try
-                   {
-                       using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
-                       {
-                           using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
-                           {
-                               try
-                               {
-                                   var jsonResponse1 = sr1.ReadToEnd();
-                                List<CheckDto> checks = JsonConvert.DeserializeObject<List<CheckDto>>(jsonResponse1);
-                                //MessageBox.Show(jsonResponse1);
-                                ChecksGrid.ItemsSource = checks;
-                                double sum = 0;
-                                foreach (var item in checks)
-                                {
-                                    sum += item.SumPrice.Value;
-                                }
-                                MainReport.Content = "Загальна сума: " + sum+" грн!";
-                               }
-                               catch
-                               {
-                                   MessageBox.Show("Error");
-                               }
-                           }
-                       }
-                   }
-                   catch
-                   {
-                       MessageBox.Show("Error");
-                   }
-                   }
+               
        
         }
     }
