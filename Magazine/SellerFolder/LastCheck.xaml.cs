@@ -1,4 +1,5 @@
 ﻿using Magazine.ModelsDto;
+using MyPrint;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace Magazine.SellerFolder
 {
     /// <summary>
@@ -94,14 +95,7 @@ namespace Magazine.SellerFolder
                         check.TypeOfPay = "В кредит";
                         
                     }
-                    if(Printt.Text=="Ні")
-                    {
-                        
-                    }
-                    else
-                    {
-                        //TODO ДРУК ЧЕКА
-                    }
+                   
                     if (check.TypeOfPay != "В кредит")
                     {
                         string WEBSERVICE_URL2 = StaticHelper.URL + @"api/Apii/EndCheck";
@@ -130,7 +124,14 @@ namespace Magazine.SellerFolder
                                     try
                                     {
                                         HelperSeller.IsSuccessfull = true;
+                                        if (Printt.Text == "Ні")
+                                        {
 
+                                        }
+                                        else
+                                        {
+                                            Print();
+                                        }
                                         Close();
                                     }
                                     catch
@@ -147,7 +148,7 @@ namespace Magazine.SellerFolder
                         {
                             if(Borg.Text.Count()<5)
                             {
-                                MessageBox.Show("Заповніть повну інформацію, призвіще і ініціали!");
+                                System.Windows.MessageBox.Show("Заповніть повну інформацію, призвіще і ініціали!");
                             }
                             else
                             {
@@ -179,7 +180,14 @@ namespace Magazine.SellerFolder
                                             try
                                             {
                                                 HelperSeller.IsSuccessfull = true;
+                                                if (Printt.Text == "Ні")
+                                                {
 
+                                                }
+                                                else
+                                                {
+                                                    Print();
+                                                }
                                                 Close();
                                             }
                                             catch
@@ -193,7 +201,7 @@ namespace Magazine.SellerFolder
                         }
                         else
                         {
-                            MessageBox.Show("ЗАПОВНІТЬ БОРЖНИКА!");
+                            System.Windows.MessageBox.Show("ЗАПОВНІТЬ БОРЖНИКА!");
                         }
                         //TODO CREDIT
                         
@@ -203,10 +211,65 @@ namespace Magazine.SellerFolder
                 }
                 else
                 {
-                    MessageBox.Show("Помилка. Здача не можу бути від'ємною");
+                    System.Windows.MessageBox.Show("Помилка. Здача не можу бути від'ємною");
                 }
             }
             
+        }
+        private void Print()
+        {
+            var rpt = new Temp();
+            rpt.Session = new Dictionary<string, object>();
+            List<OrderItem> items = new List<OrderItem>();
+            bool isnull = false;
+            ProductInCheckDto productwithnull = new ProductInCheckDto();
+            foreach (var item in products)
+            {
+                if (item.IDOfProduct == 0)
+                {
+                    isnull = true;
+                    productwithnull = item;
+                }
+                else
+                {
+                    OrderItem order = new OrderItem();
+                    order.Name = item.Name;
+                    order.Price = item.Price.Value.ToString();
+                    if (item.IsNumurable == true)
+                    {
+                        order.Count = item.Count.Value.ToString();
+                    }
+                    else
+                    {
+                        order.Count = item.Massa.Value.ToString();
+                    }
+                    items.Add(order);
+                }
+            }
+            if (isnull)
+            {
+                items.Add(new OrderItem() { Name = "Інші продукти", Count = "-", Price = productwithnull.Massa.Value.ToString() });
+            }
+            else
+            {
+
+            }
+            rpt.Session["Model"] = new ReportModel
+            {
+                Sum = (Math.Round(check.SumPrice.Value, 1)).ToString()+" грн",
+                Date = DateTime.Now, OrderItems = items
+                
+                
+            };
+           
+            rpt.Initialize();
+          (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentText= rpt.TransformText();
+            (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted); ;
+      }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            (sender as System.Windows.Forms.WebBrowser).Print();
         }
 
         private void Typee_SelectionChanged(object sender, SelectionChangedEventArgs e)

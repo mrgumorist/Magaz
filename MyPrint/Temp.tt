@@ -1,0 +1,47 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ parameter name="Model" type="MyPrint.ReportModel"#>
+<html>
+
+<head>
+      <style type="text/css">
+        body { font-family: Calibri;width:80px;}
+        table { text-align:center; }
+        .container {width:200px; height:auto}
+    </style>
+</head>
+<body>
+<div class="container">
+<h2 style="text-align:center;">Магазин Діана</h2>
+<table style="width:100%">
+    <tr>
+        <td><#=Model.Date#></td>
+    </tr>
+</table>
+<hr/>
+<table style="width:100%">
+    <tr><th>Назва</th><th>Ціна</th><th>К-сть/Маса</th></tr>
+    <#
+    foreach(var item in Model.OrderItems) 
+    {
+    #>
+    <tr>
+     
+        <td><#=item.Name#></td>
+        <td><#=item.Price#></td>
+        <td><#=item.Count#></td>
+    </tr>
+    <#
+       
+    }
+    var total= Model.Sum;
+    #>
+    <tr><td></td><th>Сума:</th><th><#=total#></th></tr>
+    
+</table>
+<hr>
+<hr>
+<div>

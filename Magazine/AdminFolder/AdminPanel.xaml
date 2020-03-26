@@ -65,7 +65,7 @@
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_2">Продукти</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_3">Продажі</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_4">Тестування</Button>
-                    <Button Background="Black" Foreground="White" FontSize="30">Списання</Button>
+                    <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_8">Калькулятор</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_6">Повернення</Button>
                     <Button Background="Black" Foreground="White" FontSize="30" Click="Button_Click_7">Боржники</Button>
                 </StackPanel>
@@ -89,6 +89,9 @@
 
             </Frame>
             <Frame Grid.Column="1" Name="frame7" Visibility="Hidden">
+
+            </Frame>
+            <Frame Grid.Column="1" Name="frame8" Visibility="Hidden">
 
             </Frame>
         </Grid>

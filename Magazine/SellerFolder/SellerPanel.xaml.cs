@@ -152,53 +152,108 @@ namespace Magazine.SellerFolder
                 if (Comboo.Text == "По штрих коду")
                 {
                     //GetBySpecialCode
-                    string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetBySpecialCode";
-                    var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-                    if (webRequest1 != null)
+                    if (Searching.Text != "0")
                     {
-                        webRequest1.Method = "Post";
-                        webRequest1.Timeout = 12000;
-                        webRequest1.ContentType = "application/json";
-                        //webRequest1.Headers.Add("Querry", Searching.Text);
-                        webRequest1.Headers.Add("Safety", "Safety");
-                        webRequest1.Headers.Add("ID", ID.ToString());
-                        using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
+                        string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetBySpecialCode";
+                        var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                        if (webRequest1 != null)
                         {
-
-                            var json = JsonConvert.SerializeObject(Searching.Text);
-                            streamWriter2.Write(json);
-                        }
-                        using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
-                        {
-                            using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                            webRequest1.Method = "Post";
+                            webRequest1.Timeout = 12000;
+                            webRequest1.ContentType = "application/json";
+                            //webRequest1.Headers.Add("Querry", Searching.Text);
+                            webRequest1.Headers.Add("Safety", "Safety");
+                            webRequest1.Headers.Add("ID", ID.ToString());
+                            using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
                             {
-                                try
+
+                                var json = JsonConvert.SerializeObject(Searching.Text);
+                                streamWriter2.Write(json);
+                            }
+                            using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                            {
+                                using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
                                 {
-                                    var jsonResponse1 = sr1.ReadToEnd();
-                                    if (jsonResponse1 != @"0")
+                                    try
                                     {
-                                        List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
-                                        if (productDtos.Count != 1)
+                                        var jsonResponse1 = sr1.ReadToEnd();
+                                        if (jsonResponse1 != @"0")
                                         {
-                                            ProductsGrid.ItemsSource = productDtos;
+                                            List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
+                                            if (productDtos.Count != 1)
+                                            {
+                                                ProductsGrid.ItemsSource = productDtos;
+                                            }
+                                            else
+                                            {
+                                                NextStage(productDtos[0]);
+                                                Clear();
+                                            }
                                         }
                                         else
                                         {
-                                            NextStage(productDtos[0]);
-                                            Clear();
+                                            MessageBox.Show("По даному коду нічого не найдено");
                                         }
                                     }
-                                    else
+                                    catch
                                     {
-                                        MessageBox.Show("По даному коду нічого не найдено");
-                                    }
-                                }
-                                catch
-                                {
 
+                                    }
                                 }
                             }
                         }
+
+                    }
+                    else
+                    {
+                        bool founded = false;
+                        foreach (var item in UnNumarableList)
+                        {
+                            if (item.IDOfProduct == 0)
+                            {
+                                founded = true;
+                                break;
+                            }
+                        }
+                        if (founded == true)
+                        {
+                            ChangeNotAddedProduct change = new ChangeNotAddedProduct(UnNumarableList.First(x=>x.IDOfProduct==0).Massa.ToString());
+                            change.ShowDialog();
+                            if (Helper.issuccessful)
+                            {
+                                UnNumarableList.First(x => x.IDOfProduct == 0).Massa = Helper.mass;
+                                Helper.issuccessful = false;
+                                Helper.mass = 0;
+                                UpdateChecks();
+                            }
+                        }
+                        else
+                        {
+                            AddNotAddedProduct addNot = new AddNotAddedProduct();
+                            addNot.ShowDialog();
+                            if (Helper.issuccessful == true)
+                            {
+                                //MessageBox.Show("fefe");
+                                double sum = Helper.mass.Value;
+                                ProductInCheckDto inCheckDto = new ProductInCheckDto();
+                                inCheckDto.IDOfProduct = 0;
+                                inCheckDto.IsNumurable = false;
+                                inCheckDto.SpecialCode = "0";
+                                inCheckDto.Description = "fewfe";
+                                inCheckDto.Price = 1;
+                                inCheckDto.Massa = sum;
+                                inCheckDto.Name = "fe";
+                                inCheckDto.Check = CurrentCheck;
+                                UnNumarableList.Add(inCheckDto);
+                                UpdateChecks();
+                                Helper.issuccessful = false;
+                                Helper.mass = 0;
+                                Helper.count = 0;
+
+                                Searching.Focus();
+                            }
+                        }
+                        Searching.Clear();
                     }
                 }
                 else if (Comboo.Text == "За іменем")
@@ -417,41 +472,43 @@ namespace Magazine.SellerFolder
                 else
                 {
                     MessageBox.Show("Данний продукт уже є в чеку. Доповнюємо.");
-                    var ToChange = UnNumarableList.First(x => x.IDOfProduct == product.ID);
-                    string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetMaxWeigthById";
-                    var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-                    if (webRequest1 != null)
-                    {
-                        webRequest1.Method = "GET";
-                        webRequest1.Timeout = 12000;
-                        webRequest1.ContentType = "application/json";
-                        // webRequest1.Headers.Add("Querry", Searching.Text);
-                        webRequest1.Headers.Add("Safety", "Safety");
-                        webRequest1.Headers.Add("ID", ToChange.IDOfProduct.ToString());
-                        using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                   
+                        var ToChange = UnNumarableList.First(x => x.IDOfProduct == product.ID);
+                        string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetMaxWeigthById";
+                        var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                        if (webRequest1 != null)
                         {
-                            using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                            webRequest1.Method = "GET";
+                            webRequest1.Timeout = 12000;
+                            webRequest1.ContentType = "application/json";
+                            // webRequest1.Headers.Add("Querry", Searching.Text);
+                            webRequest1.Headers.Add("Safety", "Safety");
+                            webRequest1.Headers.Add("ID", ToChange.IDOfProduct.ToString());
+                            using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
                             {
-                                try
+                                using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
                                 {
-                                    var jsonResponse1 = sr1.ReadToEnd();
-                                    jsonResponse1 = jsonResponse1.Replace(".", ",");
-                                    double response = double.Parse(jsonResponse1);
-                                    ChangeMassUnNumarable update = new ChangeMassUnNumarable(ToChange, response);
-                                    update.ShowDialog();
-                                    if (Helper.issuccessful == true)
+                                    try
                                     {
-                                        UnNumarableList.First(x => x.IDOfProduct == ToChange.IDOfProduct).Massa = Helper.mass;
-                                        UpdateChecks();
+                                        var jsonResponse1 = sr1.ReadToEnd();
+                                        jsonResponse1 = jsonResponse1.Replace(".", ",");
+                                        double response = double.Parse(jsonResponse1);
+                                        ChangeMassUnNumarable update = new ChangeMassUnNumarable(ToChange, response);
+                                        update.ShowDialog();
+                                        if (Helper.issuccessful == true)
+                                        {
+                                            UnNumarableList.First(x => x.IDOfProduct == ToChange.IDOfProduct).Massa = Helper.mass;
+                                            UpdateChecks();
+                                        }
                                     }
-                                }
-                                catch
-                                {
+                                    catch
+                                    {
 
+                                    }
                                 }
                             }
                         }
-                    }
+                   
                 }
                 Searching.Focus();
                 //Доповнення
@@ -493,39 +550,55 @@ namespace Magazine.SellerFolder
                 var contextMenu = (ContextMenu)menuItem.Parent;
                 var item = (DataGrid)contextMenu.PlacementTarget;
                 var ToChange = (ProductInCheckDto)item.SelectedCells[0].Item;
-                    string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetMaxWeigthById";
-                    var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-                    if (webRequest1 != null)
+                    if (ToChange.IDOfProduct != 0)
                     {
-                        webRequest1.Method = "GET";
-                        webRequest1.Timeout = 12000;
-                        webRequest1.ContentType = "application/json";
-                       // webRequest1.Headers.Add("Querry", Searching.Text);
-                        webRequest1.Headers.Add("Safety", "Safety");
-                        webRequest1.Headers.Add("ID", ToChange.IDOfProduct.ToString());
-                        using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                        string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetMaxWeigthById";
+                        var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                        if (webRequest1 != null)
                         {
-                            using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                            webRequest1.Method = "GET";
+                            webRequest1.Timeout = 12000;
+                            webRequest1.ContentType = "application/json";
+                            // webRequest1.Headers.Add("Querry", Searching.Text);
+                            webRequest1.Headers.Add("Safety", "Safety");
+                            webRequest1.Headers.Add("ID", ToChange.IDOfProduct.ToString());
+                            using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
                             {
-                                try
+                                using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
                                 {
-                                    var jsonResponse1 = sr1.ReadToEnd();
-                                    jsonResponse1=jsonResponse1.Replace(".", ",");
-                                    double response = double.Parse(jsonResponse1);
-                                    ChangeMassUnNumarable update = new ChangeMassUnNumarable(ToChange, response);
-                                    update.ShowDialog();
-                                    if (Helper.issuccessful == true)
+                                    try
                                     {
-                                        UnNumarableList.First(x => x.IDOfProduct == ToChange.IDOfProduct).Massa = Helper.mass;
-                                        UpdateChecks();
+                                        var jsonResponse1 = sr1.ReadToEnd();
+                                        jsonResponse1 = jsonResponse1.Replace(".", ",");
+                                        double response = double.Parse(jsonResponse1);
+                                        ChangeMassUnNumarable update = new ChangeMassUnNumarable(ToChange, response);
+                                        update.ShowDialog();
+                                        if (Helper.issuccessful == true)
+                                        {
+                                            UnNumarableList.First(x => x.IDOfProduct == ToChange.IDOfProduct).Massa = Helper.mass;
+                                            UpdateChecks();
+                                        }
                                     }
-                                }
-                                catch
-                                {
+                                    catch
+                                    {
 
+                                    }
                                 }
                             }
                         }
+                    }
+                    else
+                    {
+                        ChangeNotAddedProduct change = new ChangeNotAddedProduct(ToChange.Massa.ToString());
+                        change.ShowDialog();
+                        if(Helper.issuccessful)
+                        {
+                            UnNumarableList.First(x => x.IDOfProduct == 0).Massa = Helper.mass;
+                            Helper.issuccessful = false;
+                            Helper.mass = 0;
+                            UpdateChecks();
+                        }
+                       //Change added sum
                     }
                    
                 }
