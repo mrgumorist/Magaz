@@ -28,7 +28,7 @@
                     <DataGridTextColumn Binding="{Binding Initsials}" Header="Ініціали" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="200" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding dateOfGetCredit}" Header="Дата" Width="200" IsReadOnly="True" />
-                </DataGrid.Columns>
+                </DataGrid.Columns>]
             </DataGrid>
         </Grid>
     </Grid>

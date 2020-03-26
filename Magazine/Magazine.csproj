@@ -107,9 +107,16 @@
     <Compile Include="AdminFolder\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDto\CalcIn.cs" />
+    <Compile Include="ModelsDto\CalcOut.cs" />
     <Compile Include="ModelsDto\CreditDto.cs" />
     <Compile Include="ModelsDto\DateDto.cs" />
     <Compile Include="ModelsDto\DatesDto.cs" />
+    <Compile Include="ModelsDto\InAndOutsDto.cs" />
+    <Compile Include="ModelsDto\Lena.cs" />
+    <Compile Include="ModelsDto\Lesia.cs" />
+    <Compile Include="ModelsDto\Spisannya.cs" />
+    <Compile Include="ModelsDto\SpisannyaOnAnotherMarket.cs" />
     <Compile Include="SellerFolder\AddNotAddedProduct.xaml.cs">
       <DependentUpon>AddNotAddedProduct.xaml</DependentUpon>
     </Compile>
