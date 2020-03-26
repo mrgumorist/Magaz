@@ -1,4 +1,5 @@
 ﻿using Magazine.ModelsDto;
+using Magazine.SellerFolder;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,7 @@ namespace Magazine.AdminFolder
                             List<CreditDto> videogames = JsonConvert.DeserializeObject<List<CreditDto>>(jsonResponse1);
                             credits.Clear();
                             credits.AddRange(videogames);
+                            CreditsDrid.ItemsSource = null;
                             CreditsDrid.ItemsSource = credits;
                             //MessageBox.Show("Kek");
                         }
@@ -60,5 +62,25 @@ namespace Magazine.AdminFolder
                 }
             }
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                var menuItem = (MenuItem)sender;
+                var contextMenu = (ContextMenu)menuItem.Parent;
+                var item = (DataGrid)contextMenu.PlacementTarget;
+                var ToChange = (CreditDto)item.SelectedCells[0].Item;
+                CreditChange credit = new CreditChange(ToChange);
+                credit.ShowDialog();
+            }
+            catch
+            {
+
+            }
+        }
+
+    
     }
 }

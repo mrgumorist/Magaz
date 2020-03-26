@@ -16,8 +16,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+          
             </Grid.ColumnDefinitions>
             <Button Background="Black" Foreground="White" FontSize="20" Click="Button_Click">Оновити/завантажити</Button>
         </Grid>
@@ -28,7 +27,13 @@
                     <DataGridTextColumn Binding="{Binding Initsials}" Header="Ініціали" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="200" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding dateOfGetCredit}" Header="Дата" Width="200" IsReadOnly="True" />
-                </DataGrid.Columns>]
+                </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                            <ContextMenu>
+                        <MenuItem Header="Погасити" Click="MenuItem_Click"></MenuItem>
+                    </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        
             </DataGrid>
         </Grid>
     </Grid>
