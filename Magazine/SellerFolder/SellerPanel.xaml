@@ -67,15 +67,22 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
+
                 <DataGrid AutoGenerateColumns="False" x:Name="ProductsGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="1" ColumnWidth="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MouseDoubleClick="ProductsGrid_MouseDoubleClick">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden"/>
-                        <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding Massa}" Header="Масса" Width="140" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1/кг" Width="140" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" FontSize="20" FontWeight="Bold" />
+                        <DataGridTextColumn Binding="{Binding Massa}" Header="Масса" Width="140" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1/кг" Width="140" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -101,15 +108,21 @@
                     </Grid.RowDefinitions>
                     <Label Background="Black" Foreground="White" FontSize="20">Кінцевий чек:</Label>
                     <DataGrid AutoGenerateColumns="False" x:Name="Numarable" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="1">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="15"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding Massa}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding IsNumurable}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1" Width="100" IsReadOnly="True" Visibility="Visible"/>
+                            <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Massa}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding IsNumurable}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1" Width="100" IsReadOnly="True" Visibility="Visible" FontSize="20" FontWeight="Bold"/>
                             
                             
                         </DataGrid.Columns>
@@ -137,15 +150,21 @@
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <DataGrid AutoGenerateColumns="False" x:Name="UnNumarable" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="0">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="15"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Massa}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Visible"/>
-                            <DataGridTextColumn Binding="{Binding IsNumurable}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1 кг" Width="100" IsReadOnly="True" Visibility="Visible"/>
+                            <DataGridTextColumn Binding="{Binding SpecialCode}" Header="Спеціальний код" Width="140" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Назва товару" Width="110" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Description}" Header="Короткий опис" Width="140" IsReadOnly="True"  Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Count}" Header="Кількість" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Massa}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Visible" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding IsNumurable}" Header="Маса" Width="100" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding Price}" Header="Ціна за 1 кг" Width="100" IsReadOnly="True" Visibility="Visible" FontSize="20" FontWeight="Bold"/>
 
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>

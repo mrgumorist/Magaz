@@ -22,11 +22,17 @@
         </Grid>
         <Grid Grid.Row="1">
             <DataGrid AutoGenerateColumns="False" x:Name="CreditsDrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="1" ColumnWidth="Auto">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="110" IsReadOnly="True" Visibility="Hidden"/>
-                    <DataGridTextColumn Binding="{Binding Initsials}" Header="Ініціали" Width="100" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="200" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding dateOfGetCredit}" Header="Дата" Width="200" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="110" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                    <DataGridTextColumn Binding="{Binding Initsials}" Header="Ініціали" Width="100" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="200" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                    <DataGridTextColumn Binding="{Binding dateOfGetCredit}" Header="Дата" Width="200" IsReadOnly="True" FontSize="20" FontWeight="Bold" />
                 </DataGrid.Columns>
                     <DataGrid.ContextMenu>
                             <ContextMenu>
