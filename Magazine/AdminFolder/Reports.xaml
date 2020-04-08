@@ -30,10 +30,10 @@
             </Grid.RowDefinitions>
             <DataGrid AutoGenerateColumns="False" x:Name="ChecksGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" Grid.Row="0" ColumnWidth="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="Дата" Width="140" IsReadOnly="True" Visibility="Hidden"/>
-                    <DataGridTextColumn Binding="{Binding DateCreatingOfCheck}" Header="Дата" Width="140" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding TypeOfPay}" Header="Тип оплати" Width="100" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SumPrice}" Header="Сумма" Width="110" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="Дата" Width="140" IsReadOnly="True" Visibility="Hidden" FontSize="20" FontWeight="Bold"/>
+                    <DataGridTextColumn Binding="{Binding DateCreatingOfCheck}" Header="Дата" Width="140" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                    <DataGridTextColumn Binding="{Binding TypeOfPay}" Header="Тип оплати" Width="100" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
+                    <DataGridTextColumn Binding="{Binding SumPrice}" Header="Сумма" Width="110" IsReadOnly="True" FontSize="20" FontWeight="Bold"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Label Grid.Row="1" Name="MainReport" Background="Black" Foreground="White" FontSize="25">Сумма: </Label>

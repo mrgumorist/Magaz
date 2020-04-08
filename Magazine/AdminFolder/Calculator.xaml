@@ -26,12 +26,14 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="33*"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <Label Background="Black" Foreground="White" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Приходи</Label>
@@ -42,40 +44,56 @@
             <Label Background="Black" Foreground="White" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="5">Леся</Label>
             <DataGrid Grid.Row="1" AutoGenerateColumns="False"  CanUserReorderColumns="False" ColumnWidth="auto" HeadersVisibility="None" VerticalScrollBarVisibility="Auto" x:Name="PrihodsGrid" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*" FontSize="20" FontWeight="Bold"/>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False"  CanUserReorderColumns="False" ColumnWidth="auto" HeadersVisibility="None" VerticalScrollBarVisibility="Auto" x:Name="RozhodsGrid" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*" FontSize="20" FontWeight="Bold"/>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Row="1" Grid.Column="2" AutoGenerateColumns="False"  CanUserReorderColumns="False" ColumnWidth="auto" HeadersVisibility="None" VerticalScrollBarVisibility="Auto" x:Name="SpisannyaGrid" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*" FontSize="20" FontWeight="Bold"/>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Row="1" Grid.Column="3" AutoGenerateColumns="False"  CanUserReorderColumns="False" ColumnWidth="auto" HeadersVisibility="None" VerticalScrollBarVisibility="Auto" x:Name="SpisannyaOnAnotherMarketGrid" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*" FontSize="20" FontWeight="Bold"/>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Row="1" Grid.Column="4" AutoGenerateColumns="False"  CanUserReorderColumns="False" ColumnWidth="auto" HeadersVisibility="None" VerticalScrollBarVisibility="Auto" x:Name="LenaSGrid" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*" FontSize="20" FontWeight="Bold"/>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Row="1" Grid.Column="5" AutoGenerateColumns="False"  CanUserReorderColumns="False" ColumnWidth="auto" HeadersVisibility="None" VerticalScrollBarVisibility="Auto" x:Name="LesiaSGrid" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*" FontSize="20" FontWeight="Bold"/>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="100" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <Grid Grid.Row="2" Grid.ColumnSpan="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label FontSize="25" Foreground="White" Background="Black">Прихід:</Label>
+                <Label FontSize="25" Foreground="White" Grid.Column="1" Name="PruhidLabel" Background="Black"></Label>
+                <Label FontSize="25" Foreground="White" Grid.Column="2" Background="Black">Розхід:</Label>
+                <Label FontSize="25" Foreground="White" Grid.Column="3" Name="RozhidLabel" Background="Black"></Label>
+                <Label FontSize="25" Foreground="White" Grid.Column="4" Background="Black">Різниця:</Label>
+                <Label FontSize="25" Foreground="White" Grid.Column="5" Name="RiznizaLabel" Background="Black"></Label>
+            </Grid>
             <Button Grid.ColumnSpan="6" Grid.Row="3" Background="Black" Foreground="White" FontSize="25" Click="Button_Click_1">Зберегти</Button>
         </Grid>
     </Grid>

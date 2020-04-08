@@ -84,9 +84,42 @@ namespace Magazine.AdminFolder
         {
             Update();
         }
+        private void Calc()
+        {
+            double PrihodsSum = 0;
+            foreach (var item in Prihods)
+            {
+                PrihodsSum += item.Sum;
+            }
+                PruhidLabel.Content = PrihodsSum.ToString();
+                double RozhidsSum = 0;
+                foreach (var item in Rozhods)
+                {
+                RozhidsSum += item.Sum;
+                }
+            foreach (var item in Spisannya)
+            {
+                RozhidsSum += item.Sum;
+            }
+            foreach (var item in SpisannyaOnAnotherMarket)
+            {
+                RozhidsSum += item.Sum;
+            }
+            foreach (var item in LenaS)
+            {
+                RozhidsSum += item.Sum;
+            }
+            foreach (var item in LesiaS)
+            {
+                RozhidsSum += item.Sum;
+            }
+            RiznizaLabel.Content = (PrihodsSum - RozhidsSum).ToString();
 
+            RozhidLabel.Content = RozhidsSum.ToString();
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            Calc();
             string WEBSERVICE_URL1 = StaticHelper.URL + $@"api/Apii/UpdateInAndOuts";
 
             var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
