@@ -132,9 +132,6 @@
     <Compile Include="AdminFolder\CreditChange.xaml.cs">
       <DependentUpon>CreditChange.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SellerFolder\EndOfSale.xaml.cs">
-      <DependentUpon>EndOfSale.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SellerFolder\HelperSeller.cs" />
     <Compile Include="SellerFolder\LastCheck.xaml.cs">
       <DependentUpon>LastCheck.xaml</DependentUpon>
@@ -228,10 +225,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminFolder\CreditChange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SellerFolder\EndOfSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

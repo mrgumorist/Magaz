@@ -50,7 +50,7 @@ namespace MyPrint
             #line default
             #line hidden
             this.Write("</td>\r\n    </tr>\r\n</table>\r\n<hr/>\r\n<table style=\"width:100%\">\r\n    <tr><th>Назва<" +
-                    "/th><th>Ціна</th><th>К-сть/Маса</th></tr>\r\n    ");
+                    "/th><th>Ціна</th><th>К-сть/Маса</th><th>Сума</th></tr>\r\n    ");
             
             #line 27 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
 
@@ -81,9 +81,16 @@ namespace MyPrint
             
             #line default
             #line hidden
+            this.Write("</td>\r\n        <td>");
+            
+            #line 36 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Sum));
+            
+            #line default
+            #line hidden
             this.Write("</td>\r\n    </tr>\r\n    ");
             
-            #line 37 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 38 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
 
        
     }
@@ -92,9 +99,9 @@ namespace MyPrint
             
             #line default
             #line hidden
-            this.Write("    <tr><td></td><th>Сума:</th><th>");
+            this.Write("    <tr><td></td><td></td><th>Загальна:</th><th>");
             
-            #line 42 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 43 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(total));
             
             #line default

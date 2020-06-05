@@ -513,6 +513,24 @@ namespace Magazine.SellerFolder
                 Searching.Focus();
                 //Доповнення
             }
+            if (Numarable.Items.Count > 0)
+            {
+                var border = VisualTreeHelper.GetChild(Numarable, 0) as Decorator;
+                if (border != null)
+                {
+                    var scroll = border.Child as ScrollViewer;
+                    if (scroll != null) scroll.ScrollToEnd();
+                }
+            }
+            if (UnNumarable.Items.Count > 0)
+            {
+                var border = VisualTreeHelper.GetChild(UnNumarable, 0) as Decorator;
+                if (border != null)
+                {
+                    var scroll = border.Child as ScrollViewer;
+                    if (scroll != null) scroll.ScrollToEnd();
+                }
+            }
             //CurrentCheck.Products.Add();
         }
         private void UpdateChecks()

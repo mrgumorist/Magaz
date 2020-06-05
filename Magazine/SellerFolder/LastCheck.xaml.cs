@@ -16,6 +16,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
+
 namespace Magazine.SellerFolder
 {
     /// <summary>
@@ -182,13 +184,13 @@ namespace Magazine.SellerFolder
                                                 HelperSeller.IsSuccessfull = true;
                                                 if (Printt.Text == "Ні")
                                                 {
-
+                                                    Close();
                                                 }
                                                 else
                                                 {
                                                     Print();
                                                 }
-                                                Close();
+                                              
                                             }
                                             catch
                                             {
@@ -237,10 +239,12 @@ namespace Magazine.SellerFolder
                     order.Price = item.Price.Value.ToString();
                     if (item.IsNumurable == true)
                     {
+                        order.Sum = string.Format("{0:0.##}", (item.Price.Value * item.Count.Value).ToString());
                         order.Count = item.Count.Value.ToString();
                     }
                     else
                     {
+                        order.Sum = string.Format("{0:0.##}", (item.Price.Value * item.Massa.Value).ToString());
                         order.Count = item.Massa.Value.ToString();
                     }
                     items.Add(order);
@@ -248,7 +252,7 @@ namespace Magazine.SellerFolder
             }
             if (isnull)
             {
-                items.Add(new OrderItem() { Name = "Інші продукти", Count = "-", Price = productwithnull.Massa.Value.ToString() });
+                items.Add(new OrderItem() { Name = "Інші продукти", Count = " ", Price = " ", Sum = string.Format("{0:0.##}", productwithnull.Massa.Value) });
             }
             else
             {
@@ -263,13 +267,21 @@ namespace Magazine.SellerFolder
             };
            
             rpt.Initialize();
-          (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentText= rpt.TransformText();
+            (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentText= rpt.TransformText();
             (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted); ;
       }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            (sender as System.Windows.Forms.WebBrowser).Print();
+            try
+            {
+                (sender as System.Windows.Forms.WebBrowser).Print();
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show("Принтер не підключено");
+            }
         }
 
         private void Typee_SelectionChanged(object sender, SelectionChangedEventArgs e)

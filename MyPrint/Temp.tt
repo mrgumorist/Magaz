@@ -23,7 +23,7 @@
 </table>
 <hr/>
 <table style="width:100%">
-    <tr><th>Назва</th><th>Ціна</th><th>К-сть/Маса</th></tr>
+    <tr><th>Назва</th><th>Ціна</th><th>К-сть/Маса</th><th>Сума</th></tr>
     <#
     foreach(var item in Model.OrderItems) 
     {
@@ -33,13 +33,14 @@
         <td><#=item.Name#></td>
         <td><#=item.Price#></td>
         <td><#=item.Count#></td>
+        <td><#=item.Sum#></td>
     </tr>
     <#
        
     }
     var total= Model.Sum;
     #>
-    <tr><td></td><th>Сума:</th><th><#=total#></th></tr>
+    <tr><td></td><td></td><th>Загальна:</th><th><#=total#></th></tr>
     
 </table>
 <hr>
