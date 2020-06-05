@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -97,105 +99,48 @@ namespace Magazine.SellerFolder
                         check.TypeOfPay = "В кредит";
                         
                     }
-                   
-                    if (check.TypeOfPay != "В кредит")
+                    if (IsConnectedToInternet()==true)
                     {
-                        string WEBSERVICE_URL2 = StaticHelper.URL + @"api/Apii/EndCheck";
-
-                        var webRequest2 = System.Net.WebRequest.Create(WEBSERVICE_URL2);
-                        if (webRequest2 != null)
+                        if (check.TypeOfPay != "В кредит")
                         {
-                            webRequest2.Method = "POST";
-                            webRequest2.Timeout = 12000;
-                            webRequest2.ContentType = "application/json";
-                            webRequest2.Headers.Add("Safety", "Safety");
-                            using (var streamWriter2 = new StreamWriter(webRequest2.GetRequestStream()))
+                            string WEBSERVICE_URL2 = StaticHelper.URL + @"api/Apii/EndCheck";
+
+                            var webRequest2 = System.Net.WebRequest.Create(WEBSERVICE_URL2);
+                            if (webRequest2 != null)
                             {
-                                List<string> kist = new List<string>();
-                                var json = JsonConvert.SerializeObject(products);
-                                kist.Add(json);
-                                var json2 = JsonConvert.SerializeObject(check);
-                                kist.Add(json2);
-                                streamWriter2.Write(JsonConvert.SerializeObject(kist));
-                            }
-                            //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
-                            using (System.IO.Stream s2 = webRequest2.GetResponse().GetResponseStream())
-                            {
-                                using (System.IO.StreamReader sr2 = new System.IO.StreamReader(s2))
+                                webRequest2.Method = "POST";
+                                webRequest2.Timeout = 12000;
+                                webRequest2.ContentType = "application/json";
+                                webRequest2.Headers.Add("Safety", "Safety");
+                                using (var streamWriter2 = new StreamWriter(webRequest2.GetRequestStream()))
                                 {
-                                    try
-                                    {
-                                        HelperSeller.IsSuccessfull = true;
-                                        if (Printt.Text == "Ні")
-                                        {
-
-                                        }
-                                        else
-                                        {
-                                            Print();
-                                        }
-                                        Close();
-                                    }
-                                    catch
-                                    {
-
-                                    }
+                                    List<string> kist = new List<string>();
+                                    var json = JsonConvert.SerializeObject(products);
+                                    kist.Add(json);
+                                    var json2 = JsonConvert.SerializeObject(check);
+                                    kist.Add(json2);
+                                    streamWriter2.Write(JsonConvert.SerializeObject(kist));
                                 }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if(Borg.Text!="")
-                        {
-                            if(Borg.Text.Count()<5)
-                            {
-                                System.Windows.MessageBox.Show("Заповніть повну інформацію, призвіще і ініціали!");
-                            }
-                            else
-                            {
-                                string WEBSERVICE_URL2 = StaticHelper.URL + @"api/Apii/EndCheckCredit";
-
-                                var webRequest2 = System.Net.WebRequest.Create(WEBSERVICE_URL2);
-                                if (webRequest2 != null)
+                                //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
+                                using (System.IO.Stream s2 = webRequest2.GetResponse().GetResponseStream())
                                 {
-                                    webRequest2.Method = "POST";
-                                    webRequest2.Timeout = 12000;
-                                    webRequest2.ContentType = "application/json";
-                                    webRequest2.Headers.Add("Safety", "Safety");
-                                    using (var streamWriter2 = new StreamWriter(webRequest2.GetRequestStream()))
+                                    using (System.IO.StreamReader sr2 = new System.IO.StreamReader(s2))
                                     {
-                                        List<string> kist = new List<string>();
-                                        var json = JsonConvert.SerializeObject(products);
-                                        kist.Add(json);
-                                        var json2 = JsonConvert.SerializeObject(check);
-                                        kist.Add(json2);
-                                        var json3 = JsonConvert.SerializeObject(Borg.Text);
-                                        kist.Add(json3);
-                                        streamWriter2.Write(JsonConvert.SerializeObject(kist));
-                                    }
-                                    //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
-                                    using (System.IO.Stream s2 = webRequest2.GetResponse().GetResponseStream())
-                                    {
-                                        using (System.IO.StreamReader sr2 = new System.IO.StreamReader(s2))
+                                        try
                                         {
-                                            try
+                                            HelperSeller.IsSuccessfull = true;
+                                            if (Printt.Text == "Ні")
                                             {
-                                                HelperSeller.IsSuccessfull = true;
-                                                if (Printt.Text == "Ні")
-                                                {
-                                                    Close();
-                                                }
-                                                else
-                                                {
-                                                    Print();
-                                                }
-                                              
+                                                Close();
                                             }
-                                            catch
+                                            else
                                             {
-                                                
+                                                Print();
                                             }
+                                        }
+                                        catch
+                                        {
+
                                         }
                                     }
                                 }
@@ -203,10 +148,72 @@ namespace Magazine.SellerFolder
                         }
                         else
                         {
-                            System.Windows.MessageBox.Show("ЗАПОВНІТЬ БОРЖНИКА!");
+                            if (Borg.Text != "")
+                            {
+                                if (Borg.Text.Count() < 5)
+                                {
+                                    System.Windows.MessageBox.Show("Заповніть повну інформацію, призвіще і ініціали!");
+                                }
+                                else
+                                {
+                                    string WEBSERVICE_URL2 = StaticHelper.URL + @"api/Apii/EndCheckCredit";
+
+                                    var webRequest2 = System.Net.WebRequest.Create(WEBSERVICE_URL2);
+                                    if (webRequest2 != null)
+                                    {
+                                        webRequest2.Method = "POST";
+                                        webRequest2.Timeout = 12000;
+                                        webRequest2.ContentType = "application/json";
+                                        webRequest2.Headers.Add("Safety", "Safety");
+                                        using (var streamWriter2 = new StreamWriter(webRequest2.GetRequestStream()))
+                                        {
+                                            List<string> kist = new List<string>();
+                                            var json = JsonConvert.SerializeObject(products);
+                                            kist.Add(json);
+                                            var json2 = JsonConvert.SerializeObject(check);
+                                            kist.Add(json2);
+                                            var json3 = JsonConvert.SerializeObject(Borg.Text);
+                                            kist.Add(json3);
+                                            streamWriter2.Write(JsonConvert.SerializeObject(kist));
+                                        }
+                                        //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
+                                        using (System.IO.Stream s2 = webRequest2.GetResponse().GetResponseStream())
+                                        {
+                                            using (System.IO.StreamReader sr2 = new System.IO.StreamReader(s2))
+                                            {
+                                                try
+                                                {
+                                                    HelperSeller.IsSuccessfull = true;
+                                                    if (Printt.Text == "Ні")
+                                                    {
+                                                        Close();
+                                                    }
+                                                    else
+                                                    {
+                                                        Print();
+                                                    }
+
+                                                }
+                                                catch
+                                                {
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                System.Windows.MessageBox.Show("ЗАПОВНІТЬ БОРЖНИКА!");
+                            }
+                            //TODO CREDIT
+
                         }
-                        //TODO CREDIT
-                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Відсутнє підключення до інтернету!");
                     }
                     
 
@@ -295,7 +302,23 @@ namespace Magazine.SellerFolder
                 Borg.IsEnabled = false;
             }
         }
-
+        public bool IsConnectedToInternet()
+        {
+            System.Net.WebRequest req = System.Net.WebRequest.Create("https://www.google.com");
+            System.Net.WebResponse resp = default(System.Net.WebResponse);
+            try
+            {
+                resp = req.GetResponse();
+                resp.Close();
+                req = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                req = null;
+                return false;
+            }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
            
