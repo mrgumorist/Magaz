@@ -32,6 +32,7 @@ namespace Magazine.AdminFolder
             ForText.Content = product.Count;
             Tovar.Content = "Товар: " + product.Name;
             Num.Focus();
+            Num.CaretIndex = Num.Text.Length;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

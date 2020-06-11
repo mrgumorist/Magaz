@@ -84,6 +84,8 @@
                     <TextBox Height="40" FontSize="30" Name="ChangeNameOfProduct"></TextBox>
                     <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Короткий опис</Label>
                     <TextBox Height="80" FontSize="30" AcceptsReturn="True" Name="ChangeShortDescription" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" ></TextBox>
+                    <Button Content="Обнулити" FontSize="30" Click="Button_Click_8"></Button>
+                    <Button Content="Заокруглити до коп." FontSize="30" Click="Button_Click_9"></Button>
                     <TextBox Height="40" FontSize="30" Name="Type" IsReadOnly="True"></TextBox>
                     <Label FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Значення:</Label>
                     <TextBox Height="40" FontSize="30" Name="OldValue" IsReadOnly="True"></TextBox>

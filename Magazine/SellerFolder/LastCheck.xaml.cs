@@ -1,4 +1,5 @@
 ﻿using Magazine.ModelsDto;
+using Magazine.Services;
 using MyPrint;
 using Newtonsoft.Json;
 using System;
@@ -54,7 +55,7 @@ namespace Magazine.SellerFolder
             Getted.Text = SumM.ToString();
             CheckNUM.Content = "ЧЕК № " + check.ID;
             Sum.Content = "Сумма до сплати: " + SumM.Value+"грн" ;
-            
+            Getted.CaretIndex = Getted.Text.Length;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -99,7 +100,7 @@ namespace Magazine.SellerFolder
                         check.TypeOfPay = "В кредит";
                         
                     }
-                    if (IsConnectedToInternet()==true)
+                    if (CheckInternetConnection.IsConnectedToInternet()==true)
                     {
                         if (check.TypeOfPay != "В кредит")
                         {
@@ -302,28 +303,45 @@ namespace Magazine.SellerFolder
                 Borg.IsEnabled = false;
             }
         }
-        public bool IsConnectedToInternet()
-        {
-            System.Net.WebRequest req = System.Net.WebRequest.Create("https://www.google.com");
-            System.Net.WebResponse resp = default(System.Net.WebResponse);
-            try
-            {
-                resp = req.GetResponse();
-                resp.Close();
-                req = null;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                req = null;
-                return false;
-            }
-        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
            
 
             //typee.SelectedIndex = typee.Items.IndexOf("foreach (ComboBoxItem cbi in someComboBox.Items)
+        }
+
+        private void Getted_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key==Key.Enter)
+            {
+                typee.IsDropDownOpen = true;
+            }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void typee_DropDownClosed(object sender, EventArgs e)
+        {
+            Printt.IsDropDownOpen = true;
+        }
+
+        private void Printt_DropDownClosed(object sender, EventArgs e)
+        {
+            Borg.Focus();
+        }
+
+        private void Borg_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key==Key.Enter)
+            {
+                Button_Click_1(sender, new RoutedEventArgs());
+            }
         }
     }
 }

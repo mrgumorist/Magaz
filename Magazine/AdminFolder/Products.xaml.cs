@@ -881,6 +881,17 @@ namespace Magazine.AdminFolder
             }
             Code.Text = "";
         }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+          
+            OldValue.Text = "0";
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            OldValue.Text = String.Format("{0:0.00}", double.Parse( OldValue.Text)); 
+        }
     }
     
 }

@@ -1,5 +1,6 @@
 ﻿using Magazine.AdminFolder;
 using Magazine.ModelsDto;
+using Magazine.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -41,8 +42,9 @@ namespace Magazine.SellerFolder
         private void LoadCheck()
         {
             string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetIdOfCheck";
-
-            var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+            if (CheckInternetConnection.IsConnectedToInternet() == true)
+            {
+                var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
             if (webRequest1 != null)
             {
                 webRequest1.Method = "GET";
@@ -70,38 +72,52 @@ namespace Magazine.SellerFolder
 
                     }
                 }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Відсутнє з'єднання! Спробуйте відновити підключення.");
+                Close();
             }
         }
         private void LoadInfo()
         {
-            string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetUserByID";
-            var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-            if (webRequest1 != null)
+            if (CheckInternetConnection.IsConnectedToInternet() == true)
             {
-                webRequest1.Method = "GET";
-                webRequest1.Timeout = 12000;
-                webRequest1.ContentType = "application/json";
-                webRequest1.Headers.Add("Safety", "Safety");
-                webRequest1.Headers.Add("ID", ID.ToString());
-                //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
-                using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetUserByID";
+                var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                if (webRequest1 != null)
                 {
-                    using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                    webRequest1.Method = "GET";
+                    webRequest1.Timeout = 12000;
+                    webRequest1.ContentType = "application/json";
+                    webRequest1.Headers.Add("Safety", "Safety");
+                    webRequest1.Headers.Add("ID", ID.ToString());
+                    //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
+                    using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
                     {
-                        try
+                        using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
                         {
-                            var jsonResponse1 = sr1.ReadToEnd();
-                            UserDto user = JsonConvert.DeserializeObject<UserDto>(jsonResponse1);
-                            NameUser.Text = user.Name;
-                            SurnameUser.Text = user.Surname;
+                            try
+                            {
+                                var jsonResponse1 = sr1.ReadToEnd();
+                                UserDto user = JsonConvert.DeserializeObject<UserDto>(jsonResponse1);
+                                NameUser.Text = user.Name;
+                                SurnameUser.Text = user.Surname;
 
-                        }
-                        catch
-                        {
+                            }
+                            catch
+                            {
 
+                            }
                         }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Відсутнє з'єднання! Спробуйте відновити підключення.");
+                Close();
             }
         }
 
@@ -155,52 +171,59 @@ namespace Magazine.SellerFolder
                     if (Searching.Text != "0")
                     {
                         string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetBySpecialCode";
-                        var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-                        if (webRequest1 != null)
+                        if (CheckInternetConnection.IsConnectedToInternet() == true)
                         {
-                            webRequest1.Method = "Post";
-                            webRequest1.Timeout = 12000;
-                            webRequest1.ContentType = "application/json";
-                            //webRequest1.Headers.Add("Querry", Searching.Text);
-                            webRequest1.Headers.Add("Safety", "Safety");
-                            webRequest1.Headers.Add("ID", ID.ToString());
-                            using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
+                            var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                            if (webRequest1 != null)
                             {
-
-                                var json = JsonConvert.SerializeObject(Searching.Text);
-                                streamWriter2.Write(json);
-                            }
-                            using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
-                            {
-                                using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                                webRequest1.Method = "Post";
+                                webRequest1.Timeout = 12000;
+                                webRequest1.ContentType = "application/json";
+                                //webRequest1.Headers.Add("Querry", Searching.Text);
+                                webRequest1.Headers.Add("Safety", "Safety");
+                                webRequest1.Headers.Add("ID", ID.ToString());
+                                using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
                                 {
-                                    try
+
+                                    var json = JsonConvert.SerializeObject(Searching.Text);
+                                    streamWriter2.Write(json);
+                                }
+                                using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                                {
+                                    using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
                                     {
-                                        var jsonResponse1 = sr1.ReadToEnd();
-                                        if (jsonResponse1 != @"0")
+                                        try
                                         {
-                                            List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
-                                            if (productDtos.Count != 1)
+                                            var jsonResponse1 = sr1.ReadToEnd();
+                                            if (jsonResponse1 != @"0")
                                             {
-                                                ProductsGrid.ItemsSource = productDtos;
+                                                List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
+                                                if (productDtos.Count != 1)
+                                                {
+                                                    ProductsGrid.ItemsSource = productDtos;
+                                                }
+                                                else
+                                                {
+                                                    NextStage(productDtos[0]);
+                                                    Clear();
+                                                }
                                             }
                                             else
                                             {
-                                                NextStage(productDtos[0]);
-                                                Clear();
+                                                MessageBox.Show("По даному коду нічого не найдено");
                                             }
                                         }
-                                        else
+                                        catch
                                         {
-                                            MessageBox.Show("По даному коду нічого не найдено");
-                                        }
-                                    }
-                                    catch
-                                    {
 
+                                        }
                                     }
                                 }
                             }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Помилка. Відсутнє з'єднання.");
                         }
 
                     }
@@ -260,50 +283,57 @@ namespace Magazine.SellerFolder
                 {
                     //GetBySpecialCode
                     string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetByName";
-                    var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-                    if (webRequest1 != null)
+                    if (CheckInternetConnection.IsConnectedToInternet() == true)
                     {
-                        webRequest1.Method = "Post";
-                        webRequest1.Timeout = 12000;
-                        webRequest1.ContentType = "application/json";
-                      //  webRequest1.Headers.Add("Querry", Searching.Text);
-                        webRequest1.Headers.Add("Safety", "Safety");
-                        webRequest1.Headers.Add("ID", ID.ToString());
-                        using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
+                        var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                        if (webRequest1 != null)
                         {
-
-                            var json = JsonConvert.SerializeObject(Searching.Text);
-                            streamWriter2.Write(json);
-                        }
-                        using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
-                        {
-                            using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                            webRequest1.Method = "Post";
+                            webRequest1.Timeout = 12000;
+                            webRequest1.ContentType = "application/json";
+                            //  webRequest1.Headers.Add("Querry", Searching.Text);
+                            webRequest1.Headers.Add("Safety", "Safety");
+                            webRequest1.Headers.Add("ID", ID.ToString());
+                            using (var streamWriter2 = new StreamWriter(webRequest1.GetRequestStream()))
                             {
-                                try
-                                {
-                                    var jsonResponse1 = sr1.ReadToEnd();
-                                    if (jsonResponse1 != @"0")
-                                    {
-                                        List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
-                                        if (productDtos.Count != 0)
-                                        {
-                                            ProductsGrid.ItemsSource = productDtos;
-                                           
-                                        }
-                                        
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("За даним ім'ям нічого не найдено");
-                                        Searching.Focus();
-                                    }
-                                }
-                                catch
-                                {
 
+                                var json = JsonConvert.SerializeObject(Searching.Text);
+                                streamWriter2.Write(json);
+                            }
+                            using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                            {
+                                using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                                {
+                                    try
+                                    {
+                                        var jsonResponse1 = sr1.ReadToEnd();
+                                        if (jsonResponse1 != @"0")
+                                        {
+                                            List<ProductDto> productDtos = JsonConvert.DeserializeObject<List<ProductDto>>(jsonResponse1);
+                                            if (productDtos.Count != 0)
+                                            {
+                                                ProductsGrid.ItemsSource = productDtos;
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("За даним ім'ям нічого не найдено");
+                                            Searching.Focus();
+                                        }
+                                    }
+                                    catch
+                                    {
+
+                                    }
                                 }
                             }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Відсутнє підключення до інтернету!");
                     }
                 }
             }
@@ -779,6 +809,45 @@ namespace Magazine.SellerFolder
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Searching.Focus();
+        }
+
+
+        private void FormKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Searching.Focus();
+            }
+            else if (e.Key == Key.F2)
+            {
+                List<ProductInCheckDto> productss = new List<ProductInCheckDto>();
+                productss.AddRange(UnNumarableList);
+                productss.AddRange(NumarableList);
+                if (productss.Count == 0)
+                {
+                    MessageBox.Show("Помилка. Чек пустий.");
+                }
+                else
+                {
+                    LastCheck last = new LastCheck(productss, CurrentCheck);
+                    last.ShowDialog();
+                    if (HelperSeller.IsSuccessfull)
+                    {
+                        LoadCheck();
+                        NumarableList.Clear();
+                        UnNumarableList.Clear();
+                        UpdateChecks();
+                    }
+                }
+            }
+            else if (e.Key == Key.F3)
+            {
+               
+            }
+            else if (e.Key == Key.F4)
+            {
+                
+            }
         }
     }
 }

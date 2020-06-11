@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Magazine.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,102 +34,109 @@ namespace Magazine
             string password = Pass.Password;
             string WEBSERVICE_URL = StaticHelper.URL + @"api/Apii/login";
 
-            var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL);
-            if (webRequest != null)
+            if (CheckInternetConnection.IsConnectedToInternet() == true)
             {
-                webRequest.Method = "GET";
-                webRequest.Timeout = 12000;
-                webRequest.ContentType = "application/json";
-                webRequest.Headers.Add("Login", login);
-                webRequest.Headers.Add("Safety", "Safety");
-                webRequest.Headers.Add("Password", password);
-                //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
-                using (System.IO.Stream s = webRequest.GetResponse().GetResponseStream())
+                var webRequest = System.Net.WebRequest.Create(WEBSERVICE_URL);
+                if (webRequest != null)
                 {
-                    using (System.IO.StreamReader sr = new System.IO.StreamReader(s))
+                    webRequest.Method = "GET";
+                    webRequest.Timeout = 12000;
+                    webRequest.ContentType = "application/json";
+                    webRequest.Headers.Add("Login", login);
+                    webRequest.Headers.Add("Safety", "Safety");
+                    webRequest.Headers.Add("Password", password);
+                    //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
+                    using (System.IO.Stream s = webRequest.GetResponse().GetResponseStream())
                     {
-                        try
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(s))
                         {
-                            var jsonResponse = sr.ReadToEnd();
-                            if (int.Parse(jsonResponse) != -1)
+                            try
                             {
-                                string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetTypeOfAccount";
-
-                                var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
-                                if (webRequest1 != null)
+                                var jsonResponse = sr.ReadToEnd();
+                                if (int.Parse(jsonResponse) != -1)
                                 {
-                                    webRequest1.Method = "GET";
-                                    webRequest1.Timeout = 12000;
-                                    webRequest1.ContentType = "application/json";
-                                    webRequest1.Headers.Add("ID", jsonResponse);
-                                    //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
-                                    using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
-                                    {
-                                        using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
-                                        {
-                                            try
-                                            {
-                                                var jsonResponse1 = sr1.ReadToEnd();
-                                                if(jsonResponse1==@"""Creator""")
-                                                {
-                                                    this.Hide();
-                                                    
-                                                    CreatorFolder.CreatorPanel panel = new CreatorFolder.CreatorPanel();
-                                                    panel.Closed += Panel_Closed;
-                                                    panel.ShowDialog();
-                                                   // this.Show();
-                                                    //if(Kek+=panel.Closing)
-                                                    // Show();
-                                                }
-                                                else if(jsonResponse1 == @"""SuperAdmin""")
-                                                {
-                                                    this.Hide();
-                                                    SuperAdminFolder.SuperAdminPanel panel = new SuperAdminFolder.SuperAdminPanel(int.Parse(jsonResponse));
-                                                    panel.Closed += Panel_Closed;
-                                                    panel.ShowDialog();
-                                                   // this.Show();
-                                                }
-                                                else if (jsonResponse1 == @"""Admin""")
-                                                {
-                                                   
-                                                    AdminFolder.AdminPanel panel = new AdminFolder.AdminPanel(int.Parse(jsonResponse));
-                                                    panel.Closed += Panel_Closed;
-                                                    this.Hide();
-                                                    panel.ShowDialog();
-                                                    //this.Show();
-                                                }
-                                                else 
-                                                {
-                                                  
-                                                    SellerFolder.SellerPanel panel = new SellerFolder.SellerPanel(int.Parse(jsonResponse));
-                                                    panel.Closed += Panel_Closed;
-                                                    this.Hide();
-                                                    panel.ShowDialog();
-                                                }
-                                                Login.Clear();
-                                                Pass.Clear();
-                                            }
-                                            catch
-                                            {
+                                    string WEBSERVICE_URL1 = StaticHelper.URL + @"api/Apii/GetTypeOfAccount";
 
+                                    var webRequest1 = System.Net.WebRequest.Create(WEBSERVICE_URL1);
+                                    if (webRequest1 != null)
+                                    {
+                                        webRequest1.Method = "GET";
+                                        webRequest1.Timeout = 12000;
+                                        webRequest1.ContentType = "application/json";
+                                        webRequest1.Headers.Add("ID", jsonResponse);
+                                        //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
+                                        using (System.IO.Stream s1 = webRequest1.GetResponse().GetResponseStream())
+                                        {
+                                            using (System.IO.StreamReader sr1 = new System.IO.StreamReader(s1))
+                                            {
+                                                try
+                                                {
+                                                    var jsonResponse1 = sr1.ReadToEnd();
+                                                    if (jsonResponse1 == @"""Creator""")
+                                                    {
+                                                        this.Hide();
+
+                                                        CreatorFolder.CreatorPanel panel = new CreatorFolder.CreatorPanel();
+                                                        panel.Closed += Panel_Closed;
+                                                        panel.ShowDialog();
+                                                        // this.Show();
+                                                        //if(Kek+=panel.Closing)
+                                                        // Show();
+                                                    }
+                                                    else if (jsonResponse1 == @"""SuperAdmin""")
+                                                    {
+                                                        this.Hide();
+                                                        SuperAdminFolder.SuperAdminPanel panel = new SuperAdminFolder.SuperAdminPanel(int.Parse(jsonResponse));
+                                                        panel.Closed += Panel_Closed;
+                                                        panel.ShowDialog();
+                                                        // this.Show();
+                                                    }
+                                                    else if (jsonResponse1 == @"""Admin""")
+                                                    {
+
+                                                        AdminFolder.AdminPanel panel = new AdminFolder.AdminPanel(int.Parse(jsonResponse));
+                                                        panel.Closed += Panel_Closed;
+                                                        this.Hide();
+                                                        panel.ShowDialog();
+                                                        //this.Show();
+                                                    }
+                                                    else
+                                                    {
+
+                                                        SellerFolder.SellerPanel panel = new SellerFolder.SellerPanel(int.Parse(jsonResponse));
+                                                        panel.Closed += Panel_Closed;
+                                                        this.Hide();
+                                                        panel.ShowDialog();
+                                                    }
+                                                    Login.Clear();
+                                                    Pass.Clear();
+                                                }
+                                                catch
+                                                {
+
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                else
+                                {
+                                    MessageBox.Show("Невдала спроба входу");
+                                }
                             }
-                            else
+                            catch
                             {
                                 MessageBox.Show("Невдала спроба входу");
                             }
+                            //MessageBox.Show("Все чудово.");
+                            //this.Close();
                         }
-                        catch
-                        {
-                            MessageBox.Show("Невдала спроба входу");
-                        }
-                        //MessageBox.Show("Все чудово.");
-                        //this.Close();
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Відсутнє підключення до інтернету!");
             }
         }
 

@@ -25,6 +25,7 @@ namespace Magazine.SellerFolder
             InitializeComponent();
             Sum.Text = sum;
             Sum.Focus();
+            Sum.CaretIndex = Sum.Text.Length;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

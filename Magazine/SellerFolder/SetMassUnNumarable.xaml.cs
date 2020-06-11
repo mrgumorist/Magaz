@@ -32,6 +32,7 @@ namespace Magazine.SellerFolder
             InitializeComponent();
             Tovar.Content = "Товар: " + product.Name;
             ForText.Content = product.Massa.ToString()+" kg";
+            Num.CaretIndex = Num.Text.Length;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

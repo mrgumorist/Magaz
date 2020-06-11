@@ -38,6 +38,7 @@ namespace Magazine.SellerFolder
             Num.Text = product1.Massa.ToString();
             InitializeComponent();
             Num.Focus();
+            Num.CaretIndex = Num.Text.Length;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

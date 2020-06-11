@@ -170,6 +170,7 @@
     <Compile Include="SellerFolder\SetMassUnNumarable.xaml.cs">
       <DependentUpon>SetMassUnNumarable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\CheckInternetConnection.cs" />
     <Compile Include="StaticHelper.cs" />
     <Compile Include="SuperAdminFolder\ChangeUser.xaml.cs">
       <DependentUpon>ChangeUser.xaml</DependentUpon>
