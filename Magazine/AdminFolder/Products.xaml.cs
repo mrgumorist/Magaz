@@ -389,7 +389,6 @@ namespace Magazine.AdminFolder
                                                         //users.AddRange(videogames);
                                                         MessageBox.Show("Додано!");
                                                         ClearAll();
-                                                         Update();
                                                     combo2.Text = "Кількість";
                                                     Code.Focus();
                                                     }
@@ -499,7 +498,6 @@ namespace Magazine.AdminFolder
                             {
                                 var jsonResponse1 = sr1.ReadToEnd();
                                 MessageBox.Show("Успішне видалення");
-                                Update();
                             }
                             catch
                             {
@@ -641,7 +639,6 @@ namespace Magazine.AdminFolder
                                 //users.AddRange(videogames);
                                 MessageBox.Show("Змінено!");
                                 ClearAll();
-                                Update();
                             }
                             catch
                             {
@@ -665,7 +662,6 @@ namespace Magazine.AdminFolder
         {
             ProductsGrid.ItemsSource = null;
             Filter.Text = "";
-            Update();
         }
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
