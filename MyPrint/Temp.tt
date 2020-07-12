@@ -10,20 +10,22 @@
       <style type="text/css">
         body { font-family: Calibri;width:80px;}
         table { text-align:center; }
-        .container {width:200px; height:auto}
+        .container {width:180px; height:auto}
     </style>
 </head>
 <body>
 <div class="container">
-<h2 style="text-align:center;">Магазин Діана</h2>
+
 <table style="width:100%">
-    <tr>
-        <td><#=Model.Date#></td>
+ <tr>
+  <td colspan="4"><h2 style="text-align:center;" >Магазин Діана</h2></td>
+  </tr>
+  <br/>
+     <tr>
+        <td colspan="4"><#=Model.Date#></td>
     </tr>
-</table>
-<hr/>
-<table style="width:100%">
-    <tr><th>Назва</th><th>Ціна</th><th>К-сть/Маса</th><th>Сума</th></tr>
+    <br/>
+    <tr><th>Назва</th><th>Ціна</th><th>Од.</th><th>Сума</th></tr>
     <#
     foreach(var item in Model.OrderItems) 
     {
@@ -40,7 +42,7 @@
     }
     var total= Model.Sum;
     #>
-    <tr><td></td><td></td><th>Загальна:</th><th><#=total#></th></tr>
+    <tr><th>Загальна:</th><th colspan="3" style="text-align: right;"><#=total#></th></tr>
     
 </table>
 <hr>

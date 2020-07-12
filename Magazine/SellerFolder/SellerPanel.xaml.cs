@@ -1,6 +1,7 @@
 ﻿using Magazine.AdminFolder;
 using Magazine.ModelsDto;
 using Magazine.Services;
+using MyPrint;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace Magazine.SellerFolder
         int CurrentCheckId;
         int ID;
         CheckDto CurrentCheck = new CheckDto();
+        List<ProductInCheckDto> preCheckprod = null;
         List<ProductInCheckDto> NumarableList = new List<ProductInCheckDto>();
         List<ProductInCheckDto> UnNumarableList = new List<ProductInCheckDto>();
         public SellerPanel(int ID)
@@ -798,6 +800,7 @@ namespace Magazine.SellerFolder
                     UnNumarableList.Clear();
                     UpdateChecks();
                 }
+                preCheckprod = productss;
             }
         }
 
@@ -838,6 +841,9 @@ namespace Magazine.SellerFolder
                         UnNumarableList.Clear();
                         UpdateChecks();
                     }
+                    preCheckprod = productss;
+
+
                 }
             }
             else if (e.Key == Key.F3)
@@ -848,6 +854,111 @@ namespace Magazine.SellerFolder
             {
                 
             }
+            else if (e.Key == Key.F5)
+            {
+                Button_Click_6(sender, e);
+            }
+        }
+
+        void PrintPrivius()
+        {
+            var rpt = new Temp();
+            rpt.Session = new Dictionary<string, object>();
+            List<OrderItem> items = new List<OrderItem>();
+            bool isnull = false;
+            ProductInCheckDto productwithnull = new ProductInCheckDto();
+            foreach (var item in preCheckprod)
+            {
+                if (item.IDOfProduct == 0)
+                {
+                    isnull = true;
+                    productwithnull = item;
+                }
+                else
+                {
+                    OrderItem order = new OrderItem();
+                    order.Name = item.Name;
+                    order.Price = item.Price.Value.ToString();
+                    if (item.IsNumurable == true)
+                    {
+                        order.Sum = string.Format("{0:0.##}", (item.Price.Value * item.Count.Value).ToString());
+                        order.Count = item.Count.Value.ToString();
+                    }
+                    else
+                    {
+                        order.Sum = string.Format("{0:0.##}", (item.Price.Value * item.Massa.Value).ToString());
+                        order.Count = item.Massa.Value.ToString();
+                    }
+                    items.Add(order);
+                }
+            }
+            if (isnull)
+            {
+                items.Add(new OrderItem() { Name = "Інші продукти", Count = " ", Price = " ", Sum = string.Format("{0:0.##}", productwithnull.Massa.Value) });
+            }
+            else
+            {
+
+            }
+            double SumM = 0;
+            foreach (var item in preCheckprod)
+            {
+                if (item.IsNumurable == true)
+                {
+                    SumM += (item.Price * item.Count).Value;
+
+                }
+                else
+                {
+                    SumM += (item.Price * item.Massa).Value;
+
+                }
+            }
+   
+            rpt.Session["Model"] = new ReportModel
+            {
+                Sum = (Math.Round(SumM, 1)).ToString() + " грн",
+                Date = DateTime.Now,
+                OrderItems = items
+
+
+            };
+
+            rpt.Initialize();
+            (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentText = rpt.TransformText();
+            (webBrowser22.Child as System.Windows.Forms.WebBrowser).DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted); ;
+
+        }
+        private void webBrowser1_DocumentCompleted(object sender, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e)
+        {
+            try
+            {
+                (sender as System.Windows.Forms.WebBrowser).Print();
+                webBrowser22.Child = new System.Windows.Forms.WebBrowser();
+            }
+            catch
+            {
+                MessageBox.Show("Принтер не підключено");
+            }
+        }
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            if (preCheckprod != null)
+            {
+               if(preCheckprod.Count!=0)
+               {
+                    PrintPrivius();
+               }
+               else
+               {
+                    MessageBox.Show("Попередній чек пустий");
+               }
+            }
+            else
+            {
+                MessageBox.Show("Попередній чек пустий");
+            }
+            
         }
     }
 }

@@ -34,25 +34,29 @@ namespace MyPrint
       <style type=""text/css"">
         body { font-family: Calibri;width:80px;}
         table { text-align:center; }
-        .container {width:200px; height:auto}
+        .container {width:180px; height:auto}
     </style>
 </head>
 <body>
 <div class=""container"">
-<h2 style=""text-align:center;"">Магазин Діана</h2>
+
 <table style=""width:100%"">
-    <tr>
-        <td>");
+ <tr>
+  <td colspan=""4""><h2 style=""text-align:center;"" >Магазин Діана</h2></td>
+  </tr>
+  <br/>
+     <tr>
+        <td colspan=""4"">");
             
-            #line 21 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 25 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Date));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n    </tr>\r\n</table>\r\n<hr/>\r\n<table style=\"width:100%\">\r\n    <tr><th>Назва<" +
-                    "/th><th>Ціна</th><th>К-сть/Маса</th><th>Сума</th></tr>\r\n    ");
+            this.Write("</td>\r\n    </tr>\r\n    <br/>\r\n    <tr><th>Назва</th><th>Ціна</th><th>Од.</th><th>С" +
+                    "ума</th></tr>\r\n    ");
             
-            #line 27 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 29 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
 
     foreach(var item in Model.OrderItems) 
     {
@@ -62,35 +66,35 @@ namespace MyPrint
             #line hidden
             this.Write("    <tr>\r\n     \r\n        <td>");
             
-            #line 33 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 35 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("</td>\r\n        <td>");
             
-            #line 34 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 36 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Price));
             
             #line default
             #line hidden
             this.Write("</td>\r\n        <td>");
             
-            #line 35 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 37 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Count));
             
             #line default
             #line hidden
             this.Write("</td>\r\n        <td>");
             
-            #line 36 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 38 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Sum));
             
             #line default
             #line hidden
             this.Write("</td>\r\n    </tr>\r\n    ");
             
-            #line 38 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 40 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
 
        
     }
@@ -99,9 +103,9 @@ namespace MyPrint
             
             #line default
             #line hidden
-            this.Write("    <tr><td></td><td></td><th>Загальна:</th><th>");
+            this.Write("    <tr><th>Загальна:</th><th colspan=\"3\" style=\"text-align: right;\">");
             
-            #line 43 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
+            #line 45 "C:\Users\mrgumorist\source\repos\Magaz\MyPrint\Temp.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(total));
             
             #line default
