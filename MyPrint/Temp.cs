@@ -42,7 +42,7 @@ namespace MyPrint
 
 <table style=""width:100%"">
  <tr>
-  <td colspan=""4""><h2 style=""text-align:center;"" >Магазин Діана</h2></td>
+  <td colspan=""4""><h2 style=""text-align:center;"" >Магазин </h2></td>
   </tr>
   <br/>
      <tr>

@@ -65,7 +65,7 @@ namespace Magazine.AdminFolder
             frame1.Source = new Uri("Users.xaml", UriKind.RelativeOrAbsolute);
             frame2.Source = new Uri("Products.xaml", UriKind.RelativeOrAbsolute);
             frame3.Source = new Uri("Reports.xaml", UriKind.RelativeOrAbsolute);
-            //frame4.Source = new Uri("Accounts.xaml", UriKind.RelativeOrAbsolute);
+            frame4.Source = new Uri("Fiscal.xaml", UriKind.RelativeOrAbsolute);
             frame7.Source = new Uri("Credits.xaml", UriKind.RelativeOrAbsolute);
             frame8.Source = new Uri("Calculator.xaml", UriKind.RelativeOrAbsolute);
 

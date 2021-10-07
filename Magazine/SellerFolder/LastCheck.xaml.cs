@@ -120,6 +120,8 @@ namespace Magazine.SellerFolder
                                     kist.Add(json);
                                     var json2 = JsonConvert.SerializeObject(check);
                                     kist.Add(json2);
+                                    var json3 = JsonConvert.SerializeObject(IsAction.Text);
+                                    kist.Add(json3);
                                     streamWriter2.Write(JsonConvert.SerializeObject(kist));
                                 }
                                 //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
@@ -175,6 +177,8 @@ namespace Magazine.SellerFolder
                                             kist.Add(json2);
                                             var json3 = JsonConvert.SerializeObject(Borg.Text);
                                             kist.Add(json3);
+                                            var json4 = JsonConvert.SerializeObject(IsAction.Text);
+                                            kist.Add(json4);
                                             streamWriter2.Write(JsonConvert.SerializeObject(kist));
                                         }
                                         //webRequest.Headers.Add("StoreData", JsonConvert.SerializeObject(store));
@@ -269,9 +273,8 @@ namespace Magazine.SellerFolder
             rpt.Session["Model"] = new ReportModel
             {
                 Sum = (Math.Round(check.SumPrice.Value, 1)).ToString()+" грн",
-                Date = DateTime.Now, OrderItems = items
-                
-                
+                Date = DateTime.Now,
+                OrderItems = items
             };
            
             rpt.Initialize();

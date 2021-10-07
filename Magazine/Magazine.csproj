@@ -15,6 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +30,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -100,6 +100,9 @@
     <Compile Include="AdminFolder\Credits.xaml.cs">
       <DependentUpon>Credits.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminFolder\Fiscal.xaml.cs">
+      <DependentUpon>Fiscal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminFolder\Helper.cs" />
     <Compile Include="AdminFolder\Products.xaml.cs">
       <DependentUpon>Products.xaml</DependentUpon>
@@ -112,9 +115,11 @@
     <Compile Include="ModelsDto\CreditDto.cs" />
     <Compile Include="ModelsDto\DateDto.cs" />
     <Compile Include="ModelsDto\DatesDto.cs" />
+    <Compile Include="ModelsDto\FiscalDto.cs" />
     <Compile Include="ModelsDto\InAndOutsDto.cs" />
     <Compile Include="ModelsDto\Lena.cs" />
     <Compile Include="ModelsDto\Lesia.cs" />
+    <Compile Include="ModelsDto\NeededSumDto.cs" />
     <Compile Include="ModelsDto\Spisannya.cs" />
     <Compile Include="ModelsDto\SpisannyaOnAnotherMarket.cs" />
     <Compile Include="SellerFolder\AddNotAddedProduct.xaml.cs">
@@ -198,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminFolder\Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminFolder\Fiscal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

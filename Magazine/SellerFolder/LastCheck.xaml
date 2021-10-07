@@ -6,7 +6,7 @@
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:Magazine.SellerFolder"
         mc:Ignorable="d" Loaded="Window_Loaded"
-        Title="LastCheck" Height="426.877" Width="380.237" WindowStartupLocation="CenterScreen" Background="Black" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+        Title="LastCheck" Height="435.381" Width="380.237" WindowStartupLocation="CenterScreen" Background="Black" ResizeMode="NoResize" KeyDown="Window_KeyDown">
     <Grid>
         <WindowsFormsHost  Visibility="Hidden" Name="webBrowser22">
             <WindowsFormsHost.Child>
@@ -16,29 +16,34 @@
 
 
         <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,0,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="354" Foreground="White" Name="CheckNUM">
-           
+
         </Label>
         <Label Content="Сумма до сплати: " HorizontalAlignment="Left" Margin="0,36,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" Name="Sum"/>
         <Label Content="Надано:                                         грн" HorizontalAlignment="Left" Margin="0,81,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy"/>
         <Label Content="Решта: " HorizontalAlignment="Left" Margin="0,126,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy1"/>
 
         <Label Content="Тип оплати: " HorizontalAlignment="Left" Margin="0,166,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy2"/>
-        <ComboBox Margin="166,171,9.6,183.6" FontSize="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" Name="typee" Width="198" DropDownClosed="typee_DropDownClosed" >
+        <Label Content="Друкувати чек?" HorizontalAlignment="Left" Margin="0,211,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy3" />
+        <Button Content="Сплатити" HorizontalAlignment="Left" Height="32" Margin="0,327,0,0" VerticalAlignment="Top" Width="364" Background="White" Foreground="Black" FontWeight="Bold" Click="Button_Click_1"/>
+        <Button Content="Відмінити" HorizontalAlignment="Left" Height="32" Margin="0,364,0,0" VerticalAlignment="Top" Width="364" Background="White" Foreground="Black" FontWeight="Bold" Click="Button_Click"/>
+
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="106,81,0,0" FontSize="25" Text="" VerticalAlignment="Top" Width="196" Name="Getted" TextChanged="Getted_TextChanged" Foreground="Green" KeyDown="Getted_KeyDown" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="106,126,0,0" FontSize="25" Text="" VerticalAlignment="Top" Width="196" x:Name="Returned" IsReadOnly="True" Foreground="Red" FontWeight="Bold"/>
+        <Label Content="Боржник: " HorizontalAlignment="Left" Margin="0,282,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy4"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="125,282,0,0" FontSize="25" Text="" VerticalAlignment="Top" Width="239" HorizontalScrollBarVisibility="Auto"  Name="Borg" KeyDown="Borg_KeyDown"/>
+        <ComboBox Margin="166,171,9.6,191.6" FontSize="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" x:Name="typee" Width="198" DropDownClosed="typee_DropDownClosed" >
             <ComboBoxItem FontSize="15" Height="25" Content="Особистими" IsSelected="True"/>
             <ComboBoxItem FontSize="15" Height="25" Content="Карткой"/>
             <ComboBoxItem FontSize="15" Height="25" Content="В кредит"/>
         </ComboBox>
-        <Label Content="Друкувати чек?" HorizontalAlignment="Left" Margin="0,211,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy3" />
-        <ComboBox Margin="265,219,41.6,135.6" FontSize="20" Text="Так" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="67" Name="Printt" DropDownClosed="Printt_DropDownClosed">
+        <ComboBox Margin="297,214,9.6,154.6" FontSize="20" Text="Так" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="67" x:Name="Printt" DropDownClosed="Printt_DropDownClosed">
             <ComboBoxItem FontSize="15" Height="25" Content="Так"/>
             <ComboBoxItem FontSize="15" Height="25" Content="Ні" IsSelected="True"/>
         </ComboBox>
-        <Button Content="Сплатити" HorizontalAlignment="Left" Height="32" Margin="0,319,0,0" VerticalAlignment="Top" Width="364" Background="White" Foreground="Black" FontWeight="Bold" Click="Button_Click_1"/>
-        <Button Content="Відмінити" HorizontalAlignment="Left" Height="32" Margin="0,356,0,0" VerticalAlignment="Top" Width="364" Background="White" Foreground="Black" FontWeight="Bold" Click="Button_Click"/>
-
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="106,81,0,0" FontSize="25" Text="" VerticalAlignment="Top" Width="196" Name="Getted" TextChanged="Getted_TextChanged" Foreground="Green" KeyDown="Getted_KeyDown" FontWeight="Bold"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="106,126,0,0" FontSize="25" Text="" VerticalAlignment="Top" Width="196" x:Name="Returned" IsReadOnly="True" Foreground="Red" FontWeight="Bold"/>
-        <Label Content="Боржник: " HorizontalAlignment="Left" Margin="0,274,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy4"/>
-        <TextBox HorizontalAlignment="Left" Height="40" Margin="125,274,0,0" FontSize="25" Text="" VerticalAlignment="Top" Width="239" HorizontalScrollBarVisibility="Auto"  Name="Borg" KeyDown="Borg_KeyDown"/>
+        <Label Content="Додавати адресу в чек?" HorizontalAlignment="Left" Margin="0,246,-0.4,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Height="40" Width="374" Foreground="White" BorderBrush="White" BorderThickness="1" x:Name="Sum_Copy5" />
+        <ComboBox Margin="297,246,9.6,119.6" FontSize="20" Text="Ні" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="67" x:Name="IsAction">
+            <ComboBoxItem FontSize="15" Height="25" Content="Так"/>
+            <ComboBoxItem FontSize="15" Height="25" Content="Ні" IsSelected="True"/>
+        </ComboBox>
     </Grid>
 </Window>
